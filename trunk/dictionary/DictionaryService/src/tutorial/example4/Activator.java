@@ -136,22 +136,21 @@ public class Activator implements BundleActivator, ServiceListener
         // need one. If so, get a reference to it.
         if (event.getType() == ServiceEvent.REGISTERED)
         {
-            //if (m_ref == null)
-            {
-                String[] objectClass =
-                    (String[]) event.getServiceReference().getProperty("objectClass");
+            ServiceReference service = event.getServiceReference();
 
-                System.out.println("Registering service: " + objectClass[0]);
-                System.out.println("Language: " + event.getServiceReference().getProperty("Language"));
-            	
+            System.out.println("New dictionary discovered: " + service.getProperty("Language"));
+
+            if (m_ref == null)
+            {
                 // Get a reference to the service object.
                 m_ref = event.getServiceReference();
                 m_dictionary = (DictionaryService) m_context.getService(m_ref);
+                System.out.println("Dictionary activated");
             }
-//            else
-//            {
-//            	System.out.println("Dictservice already available...");
-//            }
+            else
+            {
+            	System.out.println("Dictservice of language "+ m_ref.getProperty("Language") +" already available...");
+            }
         }
         // If a dictionary service was unregistered, see if it
         // was the one we were using. If so, unget the service
@@ -160,7 +159,8 @@ public class Activator implements BundleActivator, ServiceListener
         {
             if (event.getServiceReference() == m_ref)
             {
-                // Unget service object and null references.
+                System.out.println("Active dictionary de-activated. Looking for another dictionary...");
+            	// Unget service object and null references.
                 m_context.ungetService(m_ref);
                 m_ref = null;
                 m_dictionary = null;
@@ -178,6 +178,11 @@ public class Activator implements BundleActivator, ServiceListener
                     // Get a reference to the first service object.
                     m_ref = refs[0];
                     m_dictionary = (DictionaryService) m_context.getService(m_ref);
+                    System.out.println("Found dictionary for language: " + m_ref.getProperty("Language"));
+                }
+                else
+                {
+                	System.out.println("No other languages found");
                 }
             }
             else
