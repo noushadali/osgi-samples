@@ -6,10 +6,7 @@ import org.apache.axis.message.SOAPEnvelope;
 
 public class SOAPDispatcher implements Dispatcher {
 
-	public void method(SOAPEnvelope req, SOAPEnvelope resp) throws SOAPException  {
-		System.out.println("Received SOAP message of type: " + req.getBody().getLocalName());
+	public void doService(SOAPEnvelope req, SOAPEnvelope resp) throws SOAPException  {
+		System.out.println("Received SOAP message of type: " + req.getBody().getChildNodes().item(0).getLocalName());
 	}
-
-	
-	
 }

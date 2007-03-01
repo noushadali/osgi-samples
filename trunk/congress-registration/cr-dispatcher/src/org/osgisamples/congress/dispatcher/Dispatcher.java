@@ -6,5 +6,5 @@ import org.apache.axis.message.SOAPEnvelope;
 
 public interface Dispatcher {
 
-	public void method(SOAPEnvelope req, SOAPEnvelope resp) throws SOAPException; 
+	public void doService(SOAPEnvelope req, SOAPEnvelope resp) throws SOAPException; 
 }
