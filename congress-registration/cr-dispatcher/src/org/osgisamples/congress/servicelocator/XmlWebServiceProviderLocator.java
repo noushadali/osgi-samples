@@ -27,9 +27,15 @@ ServiceLocator {
 			Iterator<ServiceReference> it = Arrays.asList(refs).iterator();
 			while(it.hasNext()) {
 				ServiceReference ref = it.next();
-				if(rootElement.equals(ref.getProperty("rootElement"))
-						&& (version == null || version.equals(ref.getProperty("version")))) {
-					return (XmlWebServiceProvider) context.getService(ref);
+				if(rootElement.equals(ref.getProperty("rootElement"))) {
+					System.out.println("Found the right service, now check for the version");
+					if (version == null) {
+						System.out.println("No special version requested");
+						return (XmlWebServiceProvider) context.getService(ref);
+					} else if (version.equals(ref.getProperty("version"))){
+						System.out.println("Found the requested version");
+						return (XmlWebServiceProvider) context.getService(ref);
+					}
 				}
 			}
 		}
