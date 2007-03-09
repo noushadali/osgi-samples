@@ -45,7 +45,14 @@ public class SOAPDispatcher implements Dispatcher {
 			if(service != null)
 			{
 				System.out.println("Service found throug locator: " + service.getClass().getName());
-				resp.getBody().addDocument(service.doService(req.getAsDocument()));
+				try {
+					resp.getBody().addDocument(service.doService(req.getAsDocument()));
+				}
+				catch (Throwable ex)
+				{
+					System.out.println("Caught an exception:");
+					ex.printStackTrace();
+				}
 			}
 			else
 			{
