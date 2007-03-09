@@ -31,10 +31,10 @@ ServiceLocator {
 					System.out.println("Found the right service, now check for the version");
 					if (version == null) {
 						System.out.println("No special version requested");
-						return (XmlWebServiceProvider) context.getService(ref);
+						return (XmlWebServiceProvider) getService(ref);
 					} else if (version.equals(ref.getProperty("version"))){
 						System.out.println("Found the requested version");
-						return (XmlWebServiceProvider) context.getService(ref);
+						return (XmlWebServiceProvider) getService(ref);
 					}
 				}
 			}
