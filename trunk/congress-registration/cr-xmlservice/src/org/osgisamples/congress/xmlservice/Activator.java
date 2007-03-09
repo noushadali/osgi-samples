@@ -1,15 +1,12 @@
 package org.osgisamples.congress.xmlservice;
 
-import generated.CongressRegistrationRequest;
 import generated.CongressRegistrationResponse;
 import generated.ObjectFactory;
 
 import java.util.Properties;
 
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
