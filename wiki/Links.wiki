@@ -4,3 +4,4 @@
 
 [http://www-128.ibm.com/developerworks/edu/ws-dw-ws-eclipseplugin.html IBM Developerworks tutorial]
 Nice tutorial that explains how to expose web services using OSGi bundles.
+[http://cwiki.apache.org/FELIX/bundle-plugin-for-maven-bnd.html] Doing the osgi/eclipse plugins stuff with maven2.
