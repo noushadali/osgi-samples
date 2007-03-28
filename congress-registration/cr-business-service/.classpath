@@ -5,5 +5,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/cr-domain"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3.8.1"/>
+	<classpathentry kind="lib" path="easymock.jar"/>
+	<classpathentry kind="lib" path="commons-logging-1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

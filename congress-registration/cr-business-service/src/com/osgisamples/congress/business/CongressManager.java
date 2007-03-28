@@ -1,9 +1,9 @@
 package com.osgisamples.congress.business;
 
 import com.osgisamples.congress.business.exceptions.CongressNotFoundException;
-import com.osgisamples.congress.business.exceptions.ParticipantNotFoundException;
+import com.osgisamples.congress.business.exceptions.RegistrantValidationException;
 import com.osgisamples.congress.domain.Congress;
-import com.osgisamples.congress.domain.Participant;
+import com.osgisamples.congress.domain.Registrant;
 
 /**
  * @author Jettro.Coenradie
@@ -18,15 +18,16 @@ public interface CongressManager {
 	 */
 	public void storeCongress(Congress congress);
 	
+
 	/**
-	 * Creates a new CongressRegistration object for the provided participant and congress. You do not need
-	 * to provided stored instances of the Participant and congress. If the provided data is not sufficient to
-	 * determine the exact registrant or congress, and exception is thrown.
-	 * @param participant Participant object used to find the stored participant
+	 * Creates a new CongressRegistration object for the provided (new) Registrant and congress. You do not need
+	 * to provided stored instances of the registrant and congress. If the provided data is not sufficient to
+	 * create a new registrant or find an existing registrant or congress, and exception is thrown.
+	 * @param registrant Registrant object used to create a new Registrant or find an existing one
 	 * @param congress Congress object used to find the stored congress
-	 * @throws ParticipantNotFoundException thrown if not exactly one participant can be determined by the provided Participant
-	 * @throws CongressNotFoundException thrown if not exactly one congress can be determined by the provided Congress
+	 * @throws CongressNotFoundException thrown if the provided data is not enough to determine exactly one Congress
+	 * @throws RegistrantValidationException thrown if the provided registrant is not correct
 	 */
-	public void registerParticipantForCongress(Participant participant, Congress congress)
-		throws ParticipantNotFoundException, CongressNotFoundException;
+	public void registerNewRegistrantForCongress(Registrant registrant, Congress congress)
+		throws CongressNotFoundException, RegistrantValidationException;
 }
