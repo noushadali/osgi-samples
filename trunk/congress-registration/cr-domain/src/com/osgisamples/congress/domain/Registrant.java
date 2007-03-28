@@ -2,6 +2,10 @@ package com.osgisamples.congress.domain;
 
 import java.util.Set;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 public class Registrant extends BaseDomain {
 	private static final long serialVersionUID = -2805016868966781769L;
 
@@ -63,19 +67,38 @@ public class Registrant extends BaseDomain {
 
 	@Override
 	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean returnValue = false;
+		if (obj instanceof Registrant) {
+			if (this == obj) {
+				returnValue = true;
+			} else {
+				Registrant registrantToCheck = (Registrant) obj;
+				returnValue = new EqualsBuilder()
+					.append(id, registrantToCheck.getId())
+					.append(emailAddress, registrantToCheck.getEmailAddress())
+					.isEquals();
+			}
+		}
+		return returnValue;
 	}
 
 	@Override
 	public int hashCode() {
-		// TODO Auto-generated method stub
-		return 0;
+		return new HashCodeBuilder(17,23)
+			.append(id)
+			.append(emailAddress)
+			.toHashCode();
 	}
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ToStringBuilder(this)
+		.append("ID",id)
+		.append("Name",name)
+		.append("Company",company)
+		.append("Email Address",emailAddress)
+		.append("Registration number",registrationNumber)
+		.append("Congress Roles",congressRoles.toArray())
+		.toString();
 	}
 }

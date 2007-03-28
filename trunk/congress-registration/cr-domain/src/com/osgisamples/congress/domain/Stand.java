@@ -2,6 +2,9 @@ package com.osgisamples.congress.domain;
 
 import java.util.Set;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 public class Stand extends BaseDomain {
 	private static final long serialVersionUID = 7136222864070898223L;
 
@@ -36,8 +39,19 @@ public class Stand extends BaseDomain {
 
 	@Override
 	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean returnValue = false;
+		if (obj instanceof Stand) {
+			if (this == obj) {
+				returnValue = true;
+			} else {
+				Stand standToCheck = (Stand) obj;
+				returnValue = new EqualsBuilder()
+					.append(id, standToCheck.getId())
+					.append(company, standToCheck.getCompany())
+					.isEquals();
+			}
+		}
+		return returnValue;
 	}
 
 	@Override
@@ -48,7 +62,10 @@ public class Stand extends BaseDomain {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ToStringBuilder(this)
+		.append("ID",id)
+		.append("Company",company)
+		.append("Stand keepers",standKeepers.toArray())
+		.toString();
 	}
 }
