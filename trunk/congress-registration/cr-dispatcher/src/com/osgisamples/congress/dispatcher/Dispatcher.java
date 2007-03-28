@@ -1,4 +1,4 @@
-package org.osgisamples.congress.dispatcher;
+package com.osgisamples.congress.dispatcher;
 
 import javax.xml.soap.SOAPException;
 

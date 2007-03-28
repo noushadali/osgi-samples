@@ -1,10 +1,11 @@
-package org.osgisamples.congress.dispatcher.activator;
+package com.osgisamples.congress.dispatcher.activator;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.osgisamples.congress.dispatcher.SOAPDispatcher;
-import org.osgisamples.congress.servicelocator.ServiceLocator;
-import org.osgisamples.congress.servicelocator.XmlWebServiceProviderLocator;
+
+import com.osgisamples.congress.dispatcher.SOAPDispatcher;
+import com.osgisamples.congress.servicelocator.ServiceLocator;
+import com.osgisamples.congress.servicelocator.XmlWebServiceProviderLocator;
 
 public class Activator implements BundleActivator {
 

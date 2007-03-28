@@ -3,14 +3,14 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Congress Registration WebService Dispatcher
 Bundle-SymbolicName: cr_dispatcher;singleton:=true
 Bundle-Version: 1.0.0
-Bundle-Activator: org.osgisamples.congress.dispatcher.activator.Activator
+Bundle-Activator: com.osgisamples.congress.dispatcher.activator.Activator
 Bundle-Localization: plugin
-Import-Package: org.osgi.framework;version="1.3.0",
- org.osgi.util.tracker;version="1.3.2",
- javax.servlet, javax.servlet.http, org.osgisamples.congress.dispatcher
-Export-Package: org.osgisamples.congress.dispatcher,
- org.osgisamples.provider,
- com.ibm.wsdl,
+Import-Package: com.osgisamples.congress.dispatcher,
+ javax.servlet,
+ javax.servlet.http,
+ org.osgi.framework;version="1.3.0",
+ org.osgi.util.tracker;version="1.3.2"
+Export-Package: com.ibm.wsdl,
  com.ibm.wsdl.extensions,
  com.ibm.wsdl.extensions.http,
  com.ibm.wsdl.extensions.mime,
@@ -20,6 +20,8 @@ Export-Package: org.osgisamples.congress.dispatcher,
  com.ibm.wsdl.util,
  com.ibm.wsdl.util.xml,
  com.ibm.wsdl.xml,
+ com.osgisamples.congress.dispatcher,
+ com.osgisamples.congress.provider,
  javax.wsdl,
  javax.wsdl.extensions,
  javax.wsdl.extensions.http,

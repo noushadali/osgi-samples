@@ -1,13 +1,14 @@
-package org.osgisamples.congress.dispatcher;
+package com.osgisamples.congress.dispatcher;
 
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPFault;
 
 import org.apache.axis.message.SOAPEnvelope;
-import org.osgisamples.congress.servicelocator.ServiceLocator;
-import org.osgisamples.provider.XmlWebServiceProvider;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+
+import com.osgisamples.congress.provider.XmlWebServiceProvider;
+import com.osgisamples.congress.servicelocator.ServiceLocator;
 
 public class SOAPDispatcher implements Dispatcher {
 
