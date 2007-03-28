@@ -1,4 +1,4 @@
-package com.osgisamples.congress.business.exceptions;
+package com.osgisamples.congress.business;
 
 public class CongressNotFoundException extends RuntimeException {
 	private static final long serialVersionUID = -7097870575990911222L;

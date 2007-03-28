@@ -1,4 +1,4 @@
-package com.osgisamples.provider;
+package com.osgisamples.congress.provider;
 
 import org.w3c.dom.Document;
 

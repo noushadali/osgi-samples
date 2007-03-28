@@ -1,5 +1,6 @@
 package com.osgisamples.congress.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -15,7 +16,7 @@ public class Registrant extends BaseDomain {
 	private String emailAddress;
 	private String registrationNumber;
 	
-	private Set<? extends CongressRole> congressRoles;
+	private Set<CongressRole> congressRoles = new HashSet<CongressRole>();
 
 	public String getCompany() {
 		return company;
@@ -29,7 +30,7 @@ public class Registrant extends BaseDomain {
 		return congressRoles;
 	}
 
-	public void setCongressRoles(Set<? extends CongressRole> congressRoles) {
+	public void setCongressRoles(Set<CongressRole> congressRoles) {
 		this.congressRoles = congressRoles;
 	}
 

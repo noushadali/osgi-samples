@@ -4,8 +4,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.osgisamples.congress.business.CongressManager;
-import com.osgisamples.congress.business.exceptions.CongressNotFoundException;
-import com.osgisamples.congress.business.exceptions.RegistrantValidationException;
+import com.osgisamples.congress.business.CongressNotFoundException;
+import com.osgisamples.congress.business.RegistrantValidationException;
 import com.osgisamples.congress.dataaccess.CongressDao;
 import com.osgisamples.congress.dataaccess.RegistrantDao;
 import com.osgisamples.congress.dataaccess.exceptions.ObjectRetrievalFailureException;
