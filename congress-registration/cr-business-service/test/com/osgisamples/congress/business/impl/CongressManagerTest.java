@@ -1,9 +1,9 @@
-package com.osgisamples.congress.persistence;
+package com.osgisamples.congress.business.impl;
 import static org.easymock.EasyMock.*;
 import junit.framework.TestCase;
 
 import com.osgisamples.congress.business.CongressManager;
-import com.osgisamples.congress.business.exceptions.CongressNotFoundException;
+import com.osgisamples.congress.business.CongressNotFoundException;
 import com.osgisamples.congress.business.impl.CongressManagerImpl;
 import com.osgisamples.congress.dataaccess.CongressDao;
 import com.osgisamples.congress.dataaccess.RegistrantDao;

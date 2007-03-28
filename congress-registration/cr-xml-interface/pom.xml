@@ -2,13 +2,23 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.osgisamples.cr.xmlinterface</groupId>
+	<groupId>com.osgisamples.cr</groupId>
 	<artifactId>cr-xml-interface</artifactId>
-	<packaging>jar</packaging>
+	<packaging>bundle</packaging>
 	<version>1.0.0-SNAPSHOT</version>
 	<name>Congress Registration - XML interface</name>
 	<url>http://www.osgisamples.com</url>
 	<dependencies>
+		<dependency>
+			<groupId>${pom.groupId}</groupId>
+			<artifactId>cr-service-provider-api</artifactId>
+			<version>${pom.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.osgi</groupId>
+			<artifactId>equinox</artifactId>
+			<version>3.2.2</version>
+		</dependency>
 		<dependency>
 			<groupId>com.sun.xml.bind</groupId>
 			<artifactId>jaxb-impl</artifactId>
@@ -43,6 +53,13 @@
 			</url>
 			<layout>legacy</layout>
 		</repository>
+		<repository>
+			<id>apache.m2.incubator</id>
+			<name>Apache M2 Incubator Repository</name>
+			<url>
+				http://people.apache.org/repo/m2-incubating-repository/
+			</url>
+		</repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
@@ -58,6 +75,13 @@
 				https://maven-repository.dev.java.net/nonav/repository
 			</url>
 			<layout>legacy</layout>
+		</pluginRepository>
+		<pluginRepository>
+			<id>apache.m2.incubator</id>
+			<name>Apache M2 Incubator Repository</name>
+			<url>
+				http://people.apache.org/repo/m2-incubating-repository/
+			</url>
 		</pluginRepository>
 	</pluginRepositories>
 
@@ -81,6 +105,25 @@
 				<configuration>
 					<source>1.5</source>
 					<target>1.5</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Private-Package>
+							org.osgisamples.congress.xmlservice.*,
+							javax.xml.bind.*,
+							com.sun.*,
+							javax.*,
+							nl.gridshore.*
+						</Private-Package>
+						<Bundle-Activator>
+							org.osgisamples.congress.xmlservice.Activator
+						</Bundle-Activator>
+					</instructions>
 				</configuration>
 			</plugin>
 		</plugins>

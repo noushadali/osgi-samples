@@ -1,7 +1,5 @@
 package com.osgisamples.congress.business;
 
-import com.osgisamples.congress.business.exceptions.CongressNotFoundException;
-import com.osgisamples.congress.business.exceptions.RegistrantValidationException;
 import com.osgisamples.congress.domain.Congress;
 import com.osgisamples.congress.domain.Registrant;
 
