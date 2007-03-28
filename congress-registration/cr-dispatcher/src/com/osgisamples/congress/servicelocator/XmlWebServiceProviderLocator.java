@@ -1,4 +1,4 @@
-package org.osgisamples.congress.servicelocator;
+package com.osgisamples.congress.servicelocator;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -7,7 +7,8 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
-import org.osgisamples.provider.XmlWebServiceProvider;
+
+import com.osgisamples.congress.provider.XmlWebServiceProvider;
 
 public class XmlWebServiceProviderLocator extends ServiceTracker implements
 ServiceLocator {

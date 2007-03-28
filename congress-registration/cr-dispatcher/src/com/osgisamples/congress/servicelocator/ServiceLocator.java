@@ -1,6 +1,6 @@
-package org.osgisamples.congress.servicelocator;
+package com.osgisamples.congress.servicelocator;
 
-import org.osgisamples.provider.XmlWebServiceProvider;
+import com.osgisamples.congress.provider.XmlWebServiceProvider;
 
 public interface ServiceLocator {
 
