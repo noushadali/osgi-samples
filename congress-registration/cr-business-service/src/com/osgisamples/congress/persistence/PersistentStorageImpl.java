@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.osgisamples.congress.domain.Congress;
+import com.osgisamples.congress.domain.CongressRegistration;
 import com.osgisamples.congress.domain.Registrant;
 
 public class PersistentStorageImpl {
@@ -29,6 +30,8 @@ public class PersistentStorageImpl {
 		allard.setId(1L);
 		allard.setRegistrationNumber("1000001");
 		allard.setName("Allard Buijze");
+		
+		new CongressRegistration(nljug,allard);
 	}
 	
 	public static PersistentStorageImpl getInstance() {

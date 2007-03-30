@@ -1,5 +1,8 @@
 package com.osgisamples.congress.business.impl;
 import static org.easymock.EasyMock.*;
+
+import java.util.Set;
+
 import junit.framework.TestCase;
 
 import com.osgisamples.congress.business.CongressManager;
@@ -79,10 +82,29 @@ public class CongressManagerTest extends TestCase {
 		verify(new Object[]{congressDaoMock,registrantDaoMock});
 	}
 
+	public void testListAllRegistrantsForCongress() {
+		expect(congressDaoMock.loadCongressByName("nljug-jspring-2007")).andReturn(createCongressWithRegistration());
+		replay(new Object[]{congressDaoMock});
+		Congress searchCongress = new Congress();
+		searchCongress.setName("nljug-jspring-2007");
+		Set<Registrant> registrants = congressManager.listAllRegistrantsForCongress(searchCongress);
+		assertEquals(1, registrants.size());
+		verify(new Object[]{congressDaoMock});
+	}
+	
 	private Congress createEasyCongress() {
 		Congress congress = new Congress();
 		congress.setId(new Long(1));
 		congress.setName("nljug-jspring-2007");
+		return congress;
+	}
+
+	private Congress createCongressWithRegistration() {
+		Congress congress = new Congress();
+		congress.setId(new Long(1));
+		congress.setName("nljug-jspring-2007");
+		new CongressRegistration(congress,createRegistrant());
+		
 		return congress;
 	}
 
