@@ -1,5 +1,7 @@
 package com.osgisamples.congress.business;
 
+import java.util.Set;
+
 import com.osgisamples.congress.domain.Congress;
 import com.osgisamples.congress.domain.Registrant;
 
@@ -28,4 +30,14 @@ public interface CongressManager {
 	 */
 	public void registerNewRegistrantForCongress(Registrant registrant, Congress congress)
 		throws CongressNotFoundException, RegistrantValidationException;
+	
+	/**
+	 * Returns a set with all registrants for the provided congress, if the data provided is not sufficient to
+	 * identify a unique Congress a CongressNotFoundException is thrown.
+	 * @param congress Congress item that contains items we can search on (mainly id or name)
+	 * @return Set with Registrants for the congress
+	 * @throws CongressNotFoundException Thrown if the provided congress information is not sifficient to uniquely
+	 * identify a congress.
+	 */
+	public Set<Registrant> listAllRegistrantsForCongress(Congress congress) throws CongressNotFoundException;
 }
