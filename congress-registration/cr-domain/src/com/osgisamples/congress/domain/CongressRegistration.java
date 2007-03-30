@@ -13,6 +13,7 @@ public class CongressRegistration extends BaseDomain {
 	public CongressRegistration(Congress congress, Registrant registrant) {
 		this.registeredCongress = congress;
 		this.registrant = registrant;
+		congress.getRegistrations().add(this);
 	}
 	
 	public Congress getRegisteredCongress() {
