@@ -47,7 +47,7 @@ public class SOAPDispatcher implements Dispatcher {
 			{
 				System.out.println("Service found throug locator: " + service.getClass().getName());
 				try {
-					resp.getBody().addDocument(service.doService(req.getAsDocument()));
+					resp.getBody().addDocument(service.doService(req.getBody().getFirstChild()));
 				}
 				catch (Throwable ex)
 				{

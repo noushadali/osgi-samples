@@ -4,7 +4,7 @@
 
 	<service name="congress" style="message">
 		<parameter name="allowedMethods" value="*"/>
-		<parameter name="className" value="org.osgisamples.congress.dispatcher.SOAPDispatcher"/>
+		<parameter name="className" value="com.osgisamples.congress.dispatcher.SOAPDispatcher"/>
 	</service>
 	
 	<transport name="http">
