@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary OSGi-Samples here you can find the What/Why/How of this project
 
 = Introduction =
 
