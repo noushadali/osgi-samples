@@ -26,7 +26,7 @@ public class Registrant extends BaseDomain {
 		this.company = company;
 	}
 
-	public Set<? extends CongressRole> getCongressRoles() {
+	public Set<CongressRole> getCongressRoles() {
 		return congressRoles;
 	}
 

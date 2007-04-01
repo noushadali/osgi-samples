@@ -23,7 +23,7 @@ public class MarshallerTest extends XMLTestCase {
 
 		ObjectFactory factory = new ObjectFactory();
 		CongressRegistrationResponse response = factory.createCongressRegistrationResponse();
-		response.setRegistrationCode(2);
+		response.setRegistrationCode("2");
 
 		Writer responseString = new StringWriter();
 		marshaller.marshal(response, responseString);

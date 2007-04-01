@@ -25,10 +25,18 @@ public interface CongressManager {
 	 * create a new registrant or find an existing registrant or congress, and exception is thrown.
 	 * @param registrant Registrant object used to create a new Registrant or find an existing one
 	 * @param congress Congress object used to find the stored congress
+	 * @return String Registration number for the (new) Registrant
 	 * @throws CongressNotFoundException thrown if the provided data is not enough to determine exactly one Congress
 	 * @throws RegistrantValidationException thrown if the provided registrant is not correct
 	 */
-	public void registerNewRegistrantForCongress(Registrant registrant, Congress congress)
+	/**
+	 * @param registrant
+	 * @param congress
+	 * @return
+	 * @throws CongressNotFoundException
+	 * @throws RegistrantValidationException
+	 */
+	public String registerNewRegistrantForCongress(Registrant registrant, Congress congress)
 		throws CongressNotFoundException, RegistrantValidationException;
 	
 	/**

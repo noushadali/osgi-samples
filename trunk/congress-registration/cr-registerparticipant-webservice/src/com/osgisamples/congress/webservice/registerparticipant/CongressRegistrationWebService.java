@@ -46,8 +46,9 @@ public class CongressRegistrationWebService implements XmlWebServiceProvider {
 		
 		CongressManager service = (CongressManager) congressManagerTracker.getService();
 		if(service != null) {
-			service.registerNewRegistrantForCongress(dh.getRegistrant(), dh.getCongress());
-			CongressRegistrationResponseAdapter responseAdapter = new CongressRegistrationResponseAdapter(); 
+			String registrantNumber = service.registerNewRegistrantForCongress(dh.getRegistrant(), dh.getCongress());
+			CongressRegistrationResponseAdapter responseAdapter = new CongressRegistrationResponseAdapter();
+			responseAdapter.setRegistrantIdentificationNumber(registrantNumber);
 			response = responseAdapter.createOkResponse();
 		}
 		else {
