@@ -2,24 +2,30 @@ package com.osgisamples.congress.webservice.registerparticipant;
 
 import generated.CongressRegistrationRequest;
 import generated.CongressRegistrationResponse;
+import generated.ObjectFactory;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.osgi.util.tracker.ServiceTracker;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 
 import com.osgisamples.congress.business.CongressManager;
 import com.osgisamples.congress.provider.XmlWebServiceProvider;
+import com.osgisamples.congress.webservice.registerparticipant.adapter.CongressRegistrationRequestAdapter;
+import com.osgisamples.congress.webservice.registerparticipant.adapter.CongressRegistrationResponseAdapter;
+import com.osgisamples.congress.webservice.registerparticipant.dataholder.CongressRegistrationRequestDataHolder;
 
 public class CongressRegistrationWebService implements XmlWebServiceProvider {
 
-	CongressManager congressManager;
+	private ServiceTracker congressManagerTracker;
 	
-	public Document doService(final Document request) {
+	public Document doService(final Node request) {
 		Document xmlResponse = null;
 		try {
 			JAXBContext context = JAXBContext.newInstance(CongressRegistrationResponse.class.getPackage().getName());
-			CongressRegistrationRequest requestObject =  (CongressRegistrationRequest) context.createUnmarshaller().unmarshal(request);
+			CongressRegistrationRequest requestObject = (CongressRegistrationRequest) context.createUnmarshaller().unmarshal(request);
 
 			CongressRegistrationResponse responseObject = registerCongress(requestObject);
 
@@ -32,9 +38,26 @@ public class CongressRegistrationWebService implements XmlWebServiceProvider {
 	}
 
 	private CongressRegistrationResponse registerCongress(CongressRegistrationRequest requestObject) {
-		// adapt the request object
-//		congressManager.
-		return null;
+		CongressRegistrationResponse response = null;
+		
+		CongressRegistrationRequestAdapter requestAdapter = new CongressRegistrationRequestAdapter(); 
+		
+		CongressRegistrationRequestDataHolder dh = requestAdapter.adapt(requestObject);
+		
+		CongressManager service = (CongressManager) congressManagerTracker.getService();
+		if(service != null) {
+			service.registerNewRegistrantForCongress(dh.getRegistrant(), dh.getCongress());
+			CongressRegistrationResponseAdapter responseAdapter = new CongressRegistrationResponseAdapter(); 
+			response = responseAdapter.createOkResponse();
+		}
+		else {
+			response = new ObjectFactory().createCongressRegistrationResponse();
+		}
+		return response;
+	}
+
+	public void setCongressManagerTracker(ServiceTracker congressManagerTracker) {
+		this.congressManagerTracker = congressManagerTracker;
 	}
 
 }
