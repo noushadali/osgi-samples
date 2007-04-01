@@ -1,4 +1,4 @@
-#Here you'll find the basics of osgi
+#summary Here you'll find the basics of osgi
 
 = Introduction =
 
