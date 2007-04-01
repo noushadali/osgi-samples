@@ -30,7 +30,7 @@ public class CongressManagerImpl implements CongressManager {
 		congressDao.storeCongress(congress);
 	}
 
-	public void registerNewRegistrantForCongress(final Registrant registrant, Congress searchCongress) 
+	public String registerNewRegistrantForCongress(final Registrant registrant, Congress searchCongress) 
 			throws CongressNotFoundException, RegistrantValidationException {
 		Congress congress = loadCongress(searchCongress);
 		Registrant toRegisterRegistrant;
@@ -44,6 +44,7 @@ public class CongressManagerImpl implements CongressManager {
 
 		CongressRegistration congressRegistration = new CongressRegistration(congress,toRegisterRegistrant);
 		congressDao.storeCongressRegistration(congressRegistration);
+		return toRegisterRegistrant.getRegistrationNumber();
 	}
 
 	public Set<Registrant> listAllRegistrantsForCongress(final Congress searchCongress) throws CongressNotFoundException {

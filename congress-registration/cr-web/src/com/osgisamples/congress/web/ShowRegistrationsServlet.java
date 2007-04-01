@@ -28,13 +28,19 @@ public class ShowRegistrationsServlet extends HttpServlet {
 
 	private String createListOfRegistrants() {
 		StringBuilder builder = new StringBuilder();
+		builder.append("<table border=\"1px solid black\">");
+		builder.append("<tr><th>Name</th><th>Registration Number</th></tr>");
 		Congress congress = new Congress();
 		congress.setName("NLJug");
 		Set<Registrant> registrants = congressManager.listAllRegistrantsForCongress(congress);
 		for (Registrant registrant : registrants) {
+			builder.append("<tr><td>");
 			builder.append(registrant.getName());
-			builder.append("<br/>");
+			builder.append("</td><td>");
+			builder.append(registrant.getRegistrationNumber());
+			builder.append("</td></tr>");
 		}
+		builder.append("</table>");
 		return builder.toString();
 	}
 	

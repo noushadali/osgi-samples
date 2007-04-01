@@ -85,7 +85,7 @@ public class PersistentStorageImpl {
 		Registrant foundRegistrant = null;
 		for (Entry<Long,Registrant> registrantEntry : registrants.entrySet()) {
 			Registrant registrant = registrantEntry.getValue();
-			if (registrant.getName().equals(registrationNumber)) {
+			if (registrant.getRegistrationNumber().equals(registrationNumber)) {
 				foundRegistrant = registrant;
 				break;
 			}
@@ -98,13 +98,32 @@ public class PersistentStorageImpl {
 	}
 
 	public void storeRegistrant(final Registrant registrant) {
-		if (registrant.getId() == null) {
-			registrant.setId(myIdGenerator.nextId());
+		if (registrant.getId() == null ) {
+			Registrant existingRegistrant = checkForExistingRegistrantByEmail(registrant.getEmailAddress());
+			if (existingRegistrant == null) {
+				registrant.setId(myIdGenerator.nextId());
+				registrant.setRegistrationNumber(String.valueOf(1000000L+registrant.getId().longValue()));
+				registrants.put(registrant.getId(), registrant);
+			} else {
+				registrant.setCompany(existingRegistrant.getCompany());
+				registrant.setId(existingRegistrant.getId());
+				registrant.setName(existingRegistrant.getName());
+				registrant.setRegistrationNumber(existingRegistrant.getRegistrationNumber());
+				registrant.setCongressRoles(existingRegistrant.getCongressRoles());
+			}
 		}
-		if (registrant.getRegistrationNumber() == null) {
-			registrant.setRegistrationNumber(String.valueOf(1000000L+registrant.getId().longValue()));
+	}
+	
+	private Registrant checkForExistingRegistrantByEmail(String email) {
+		Registrant foundRegistrant = null;
+		for (Entry<Long,Registrant> registrantEntry : registrants.entrySet()) {
+			Registrant registrant = registrantEntry.getValue();
+			if (registrant.getEmailAddress().equals(email)) {
+				foundRegistrant = registrant;
+				break;
+			}
 		}
-		registrants.put(registrant.getId(), registrant);
+		return foundRegistrant;
 	}
 	
 	public void storeCongress(final Congress congress) {
@@ -115,7 +134,7 @@ public class PersistentStorageImpl {
 	}
 	
 	private class IdGenerator {
-		private long previousId;
+		private long previousId = 1;
 		public synchronized Long nextId() {
 			return ++previousId;
 		}
