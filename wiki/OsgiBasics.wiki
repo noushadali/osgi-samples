@@ -1,8 +1,8 @@
-#summary One-sentence summary of this page.
+#Here you'll find the basics of osgi
 
 = Introduction =
 
-Add your content here.
+Within the enterprise we are used to deploying ear files if we need a new application or an update to an application. If we want some kind of migration we even need two separate instances of the same application to prevent class loading issues and of course the usages possibilities from the clients. This is where osgi steps in. Read more about osgi on the website [http://www.osgi.org osgi].
 
 
 = Details =
