@@ -2,7 +2,7 @@
 
 = Introduction =
 
-Within the enterprise we are used to deploying ear files if we need a new application or an update to an application. If we want some kind of migration we even need two separate instances of the same application to prevent class loading issues and of course the usages possibilities from the clients. This is where osgi steps in. Read more about osgi on the website [http://www.osgi.org osgi].
+Within the enterprise we are used to deploying ear files if we need a new application or an update to an application. If we want some kind of migration we even need two separate instances of the same application to prevent class loading issues and of course the usages possibilities from the clients. This is where osgi steps in. Read more about osgi on the website [http://www.osgi.org osgi]. On this page you'll find some basics about osgi and most of all about the usage of osgi for our goal.
 
 
 = Details =
