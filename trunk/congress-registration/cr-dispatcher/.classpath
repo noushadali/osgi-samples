@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry exported="true" kind="lib" path="commons-logging-1.0.4.jar"/>
 	<classpathentry exported="true" kind="lib" path="log4j-1.2.8.jar"/>
 	<classpathentry kind="lib" path="axis-ant.jar"/>
 	<classpathentry kind="lib" path="axis-schema.jar"/>
