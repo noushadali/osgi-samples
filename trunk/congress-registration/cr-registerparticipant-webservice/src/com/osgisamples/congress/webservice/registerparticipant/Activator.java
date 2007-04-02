@@ -23,7 +23,7 @@ public class Activator implements BundleActivator {
 		
 		Properties props =  new Properties();
 		props.put("rootElement", "CongressRegistrationRequest");
-		//props.put("version", context.getBundle().getHeaders().get("version"));
+		props.put("version", context.getBundle().getHeaders().get("Bundle-Version"));
 		context.registerService(XmlWebServiceProvider.class.getName(), congressRegistrationWebService, props);
 	}
 
