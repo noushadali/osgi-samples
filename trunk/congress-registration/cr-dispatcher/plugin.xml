@@ -4,12 +4,6 @@
    <extension
          point="org.eclipse.equinox.http.registry.servlets">
       <servlet
-            alias="/AxisServlet"
-            class="org.apache.axis.transport.http.AxisServlet"/>
-   </extension>
-   <extension
-         point="org.eclipse.equinox.http.registry.servlets">
-      <servlet
             alias="/services"
             class="org.apache.axis.transport.http.AxisServlet"/>
    </extension>
