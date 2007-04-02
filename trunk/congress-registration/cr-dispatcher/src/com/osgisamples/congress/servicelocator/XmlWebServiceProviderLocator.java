@@ -11,6 +11,7 @@ import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
 
 import com.osgisamples.congress.provider.XmlWebServiceProvider;
+import com.osgisamples.congress.servicelocator.helpers.VersionComparator;
 
 public class XmlWebServiceProviderLocator extends ServiceTracker implements
 ServiceLocator {
@@ -37,7 +38,7 @@ ServiceLocator {
 					if (version == null) {
 						log.info("No special version requested");
 						return (XmlWebServiceProvider) getService(ref);
-					} else if (version.equals(ref.getProperty("version"))){
+					} else if (VersionComparator.isCompatible(version, (String)ref.getProperty("version"))){
 						log.info("Found the requested version");
 						return (XmlWebServiceProvider) getService(ref);
 					}
