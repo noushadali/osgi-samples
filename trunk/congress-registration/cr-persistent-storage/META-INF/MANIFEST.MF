@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Congress Registration Persistent Storage
+Bundle-SymbolicName: cr_persistent_storage;singleton:=true
+Bundle-Activator: com.osgisamples.congress.storage.activator.PersistentStorageActivator
+Bundle-Version: 1.0.0
+Bundle-Localization: plugin
+Import-Package: org.osgi.framework;version="1.3.0",
+ org.osgi.util.tracker;version="1.3.2"
+Export-Package: com.osgisamples.congress.storage;version="1.0.0"
+Bundle-ClassPath: .
+Require-Bundle: cr_domain
