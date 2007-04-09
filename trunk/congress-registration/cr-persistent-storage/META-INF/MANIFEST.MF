@@ -7,6 +7,7 @@ Bundle-Version: 1.0.0
 Bundle-Localization: plugin
 Import-Package: org.osgi.framework;version="1.3.0",
  org.osgi.util.tracker;version="1.3.2"
-Export-Package: com.osgisamples.congress.storage;version="1.0.0"
+Export-Package: com.osgisamples.congress.dataaccess;version="1.0.0",
+ com.osgisamples.congress.dataaccess.exceptions
 Bundle-ClassPath: .
 Require-Bundle: cr_domain
