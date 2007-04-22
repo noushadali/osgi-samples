@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project name="CongressRegistration" soapui-version="1.7" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="ProjectSettings@projectRoot">D:\data\projects\osgi-samples-google\trunk\congress-registration\documentation</con:setting></con:settings><con:interface name="SOAPDispatcher" bindingName="{http://localhost:81/services/congress}congressSoapBinding" soapVersion="1_1" definition="http://localhost:81/services/congress?wsdl"><con:settings/><con:endpoints><con:endpoint>http://localhost:81/services/congress</con:endpoint></con:endpoints><con:operation action="" name="doService" bindingOperationName="doService" inputName="doServiceRequest" outputName="doServiceResponse" isOneWay="false" receivesAttachments="false" sendsAttachments="false"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:81/services/congress</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:dis="http://dispatcher.congress.osgisamples.com" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+<con:soapui-project name="CongressRegistration" soapui-version="1.7" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="ProjectSettings@projectRoot">D:\data\projects\osgi-samples-google\trunk\congress-registration\documentation</con:setting></con:settings><con:interface name="SOAPDispatcher" bindingName="{http://localhost:81/services/congress}congressSoapBinding" soapVersion="1_1" definition="http://localhost:81/services/congress?wsdl"><con:settings/><con:endpoints><con:endpoint>http://localhost:81/services/congress</con:endpoint></con:endpoints><con:operation action="" name="doService" bindingOperationName="doService" inputName="doServiceRequest" outputName="doServiceResponse" isOneWay="false" receivesAttachments="false" sendsAttachments="false"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:81/services/congress</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:dis="http://dispatcher.congress.osgisamples.com" 
+	xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
    <soapenv:Header/>
    <soapenv:Body>
       <CongressRegistrationRequest version="1.0.0">
-		<Congress><CongressName>NLJug</CongressName></Congress>
-		<Registrant>
-			<FirstName>Jettro</FirstName>
-			<MiddleName></MiddleName>
-			<LastName>Coenradie</LastName>
-			<Email>jettro.coenradie@accenture.com</Email>
-		</Registrant>
-	</CongressRegistrationRequest>
+         <Congress>
+            <CongressName>NLJug</CongressName>
+         </Congress>
+         <Registrant>
+            <FirstName>Jettro</FirstName>
+            <MiddleName/>
+            <LastName>Coenradie</LastName>
+            <Email>jettro.coenradie@accenture.com</Email>
+         </Registrant>
+      </CongressRegistrationRequest>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:request></con:call></con:operation><con:definitionCache rootPart="http://localhost:81/services/congress?wsdl"><con:part><con:url>http://localhost:81/services/congress?wsdl</con:url><con:content><wsdl:definitions targetNamespace="http://localhost:81/services/congress" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://localhost:81/services/congress" xmlns:intf="http://localhost:81/services/congress" xmlns:tns1="http://dispatcher.congress.osgisamples.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 <!--WSDL created by Apache Axis version: 1.3

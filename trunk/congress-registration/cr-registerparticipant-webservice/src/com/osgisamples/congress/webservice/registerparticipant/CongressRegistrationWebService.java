@@ -1,9 +1,5 @@
 package com.osgisamples.congress.webservice.registerparticipant;
 
-import generated.CongressRegistrationRequest;
-import generated.CongressRegistrationResponse;
-import generated.ObjectFactory;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -12,6 +8,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 import com.osgisamples.congress.business.CongressManager;
+import com.osgisamples.congress.dispatcher.CongressRegistrationRequest;
+import com.osgisamples.congress.dispatcher.CongressRegistrationResponse;
+import com.osgisamples.congress.dispatcher.ObjectFactory;
 import com.osgisamples.congress.provider.XmlWebServiceProvider;
 import com.osgisamples.congress.webservice.registerparticipant.adapter.CongressRegistrationRequestAdapter;
 import com.osgisamples.congress.webservice.registerparticipant.adapter.CongressRegistrationResponseAdapter;

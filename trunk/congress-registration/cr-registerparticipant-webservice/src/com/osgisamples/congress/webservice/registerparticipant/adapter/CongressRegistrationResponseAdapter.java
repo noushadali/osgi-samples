@@ -1,7 +1,7 @@
 package com.osgisamples.congress.webservice.registerparticipant.adapter;
 
-import generated.CongressRegistrationResponse;
-import generated.ObjectFactory;
+import com.osgisamples.congress.dispatcher.CongressRegistrationResponse;
+import com.osgisamples.congress.dispatcher.ObjectFactory;
 
 public class CongressRegistrationResponseAdapter {
 	private String registrantNumber = "";
