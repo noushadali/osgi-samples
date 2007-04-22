@@ -5,11 +5,12 @@ Bundle-SymbolicName: cr_business_service;singleton:=true
 Bundle-Activator: com.osgisamples.congress.business.activator.BusinessServiceActivator
 Bundle-Version: 1.0.0
 Bundle-Localization: plugin
-Import-Package: org.apache.commons.logging,
+Import-Package: com.osgisamples.congress.dataaccess;version="1.0.0",
+ com.osgisamples.congress.dataaccess.exceptions,
+ org.apache.commons.logging,
  org.apache.commons.logging.impl,
  org.osgi.framework;version="1.3.0",
  org.osgi.util.tracker;version="1.3.2"
 Export-Package: com.osgisamples.congress.business;version="1.0.0"
 Bundle-ClassPath: .
-Require-Bundle: cr_domain,
- cr_persistent_storage
+Require-Bundle: cr_domain
