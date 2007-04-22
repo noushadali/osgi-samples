@@ -1,0 +1,6 @@
+<module>
+	<inherits name='com.google.gwt.user.User' />
+	<entry-point class='com.osgisamples.congress.frontend.client.GWTClient' />
+	<servlet path='/registrants' class='com.osgisamples.congress.frontend.server.CongressServiceImpl' />
+	<stylesheet src="cr.css" />
+</module>
