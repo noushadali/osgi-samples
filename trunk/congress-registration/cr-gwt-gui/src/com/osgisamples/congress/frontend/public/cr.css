@@ -1,0 +1,21 @@
+body {
+	margin : 100;
+	padding : 10;
+	background : #fff;
+}
+
+.registrants-title {
+	border-bottom : 1px solid #000;
+	text-align : center;
+	background-color : #ffcc00;
+}
+.registrants-widget {
+	border : 1px solid silver;
+}
+
+.registrants-grid {
+}
+
+.registrants-column {
+	font-weight : bold;
+}
