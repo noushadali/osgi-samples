@@ -4,9 +4,17 @@
    <extension
          point="org.eclipse.equinox.http.registry.resources">
 		<resource
-		 alias="/wsdl"
-		 base-name="/www"/>
+		 alias="/xsd/1.0.0"
+		 base-name="/www/xsd"/>
    </extension>
+   
+   <extension
+         point="org.eclipse.equinox.http.registry.servlets">
+      <servlet
+            alias="/wsdlgen"
+            class="com.osgisamples.congress.wsdlgenerator.WsdlServlet"/>
+   </extension>
+   
    <extension
          point="org.eclipse.equinox.http.registry.servlets">
       <servlet
