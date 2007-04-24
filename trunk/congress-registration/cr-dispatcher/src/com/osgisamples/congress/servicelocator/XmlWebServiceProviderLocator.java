@@ -28,6 +28,14 @@ ServiceLocator {
 	}
 
 	public XmlWebServiceProvider findService(final String rootElement, final String version) {
+		return (XmlWebServiceProvider) getService(findServiceReference(rootElement, version));
+	}
+
+	public ServiceReference findServiceReference(final String rootElement) {
+		return findServiceReference(rootElement, null);
+	}
+
+	public ServiceReference findServiceReference(final String rootElement, final String version) {
 		ServiceReference[] refs = this.getServiceReferences();
 		if(refs != null && refs.length > 0) {
 			Iterator<ServiceReference> it = Arrays.asList(refs).iterator();
@@ -37,10 +45,10 @@ ServiceLocator {
 					log.info("Found the right service, now check for the version");
 					if (version == null) {
 						log.info("No special version requested");
-						return (XmlWebServiceProvider) getService(ref);
+						return ref;
 					} else if (VersionComparator.isCompatible(version, (String)ref.getProperty("version"))){
 						log.info("Found the requested version");
-						return (XmlWebServiceProvider) getService(ref);
+						return ref;
 					}
 				}
 			}
