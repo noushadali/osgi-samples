@@ -22,12 +22,16 @@ public class RequestInfo {
 	}
 	
 	private void cutRequestedFolder(final String requestedFolder) {
-		if (requestedFolder.endsWith(".wsdl")) {
-			this.wsdl = requestedFolder;
-		} else if (requestedFolder.endsWith(".xsd")) {
-			this.xsd = requestedFolder;
+		String folder = requestedFolder;
+		if (folder == null) {
+			folder = "";
+		}
+		if (folder.endsWith(".wsdl")) {
+			this.wsdl = folder;
+		} else if (folder.endsWith(".xsd")) {
+			this.xsd = folder;
 		} else {
-			this.requestedFolder = requestedFolder;
+			this.requestedFolder = folder;
 		}
 	}
 
