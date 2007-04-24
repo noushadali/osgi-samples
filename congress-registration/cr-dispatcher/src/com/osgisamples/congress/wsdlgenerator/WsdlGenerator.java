@@ -6,23 +6,14 @@ import java.io.InputStream;
 
 public class WsdlGenerator {
 	private final static String PLACEHOLDER = "@@";
-
 	private final static String PLACEHOLDER_SCHEMALOCATION = "SCHEMA";
-
 	private final static String PLACEHOLDER_SERVICE = "SERVICE";
-
+	private final static String PLACEHOLDER_SERVERNAMEPORT = "SERVERNAMEPORT";
 	private final static String WSDL_TEMPLATE_FILENAME = "com/osgisamples/congress/wsdlgenerator/congress.wsdl.template";
 
-	public String generatewsdl(String schema, String service) {
+	public String generatewsdl(final String schema, final String service, final String servernameport) {
 		String readTemplate = createWsdlTemplate();
-//		try {
-//			readTemplate = loadStringFromFile();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//			throw new RuntimeException("error while reading the wsdl template",e);
-//		}
-		
-		readTemplate = replacePlaceHolders(readTemplate, schema, service);
+		readTemplate = replacePlaceHolders(readTemplate, schema, service, servernameport);
 		return readTemplate;
 	}
 
@@ -71,7 +62,7 @@ public class WsdlGenerator {
 		"	</binding>" +
 		"	<service name=\"SOAPDispatcherService\">" +
 		"		<port binding=\"curr:congressSoapBinding\" name=\"congress\">" +
-		"			<soap:address location=\"http://localhost:81/services/congress\" />" +
+		"			<soap:address location=\"http://@@SERVERNAMEPORT@@/services/congress\" />" +
 		"		</port>" +
 		"	</service>" +
 		"</definitions>";
@@ -90,9 +81,11 @@ public class WsdlGenerator {
 		return buf.toString();
 	}
 	
-	protected String replacePlaceHolders(final String original, final String schema, final String service) {
+	protected String replacePlaceHolders(final String original, final String schema, final String service,
+			final String servernameport) {
 		String replaced = original.replace(PLACEHOLDER+PLACEHOLDER_SCHEMALOCATION+PLACEHOLDER, schema);
 		replaced = replaced.replace(PLACEHOLDER+PLACEHOLDER_SERVICE+PLACEHOLDER, service);
+		replaced = replaced.replace(PLACEHOLDER+PLACEHOLDER_SERVERNAMEPORT+PLACEHOLDER, servernameport);
 		return replaced;
 	}
 }
