@@ -11,11 +11,11 @@ import org.osgi.util.tracker.ServiceTracker;
 import com.osgisamples.congress.dispatcher.SOAPDispatcher;
 import com.osgisamples.congress.servicelocator.ServiceLocator;
 import com.osgisamples.congress.servicelocator.XmlWebServiceProviderLocator;
-import com.osgisamples.congress.wsdlgenerator.WsdlServlet;
+import com.osgisamples.congress.servlet.SchemaServlet;
 
 public class Activator implements BundleActivator {
 
-	private ServletRegistrar sr;
+	private ServletRegistrar servletRegistrar;
 	
 	/*
 	 * (non-Javadoc)
@@ -25,10 +25,10 @@ public class Activator implements BundleActivator {
 		ServiceLocator locator = new XmlWebServiceProviderLocator(context);
 		SOAPDispatcher.setServiceLocator(locator);
 		
-		WsdlServlet wsdlServlet = new WsdlServlet();
-		wsdlServlet.setServiceLocator(locator);
-		sr = new ServletRegistrar(context, "/wsdlgen", wsdlServlet);
-		sr.open();
+		SchemaServlet schemaServlet = new SchemaServlet();
+		schemaServlet.setServiceLocator(locator);
+		servletRegistrar = new ServletRegistrar(context, "/wsdl", schemaServlet);
+		servletRegistrar.open();
 		
 	}
 
@@ -37,8 +37,8 @@ public class Activator implements BundleActivator {
 	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
-		sr.close();
-		sr = null;
+		servletRegistrar.close();
+		servletRegistrar = null;
 	}
 	
 	private class ServletRegistrar extends ServiceTracker {
