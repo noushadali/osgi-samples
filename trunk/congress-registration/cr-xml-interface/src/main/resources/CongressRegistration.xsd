@@ -7,16 +7,17 @@
 	<xs:element name="CongressRegistrationRequest">
 		<xs:complexType>
 			<xs:sequence minOccurs="1">
-				<xs:element ref="Congress"/>
-				<xs:element ref="Registrant"/>
+				<xs:element ref="Congress" />
+				<xs:element ref="Registrant" />
 			</xs:sequence>
+			<xs:attribute name="version" type="xs:string" use="required"/>
 		</xs:complexType>
 	</xs:element>
 
 	<xs:element name="CongressRegistrationResponse">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="RegistrationCode"/>
+				<xs:element ref="RegistrationCode" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -33,7 +34,7 @@
 	<xs:element name="CongressName">
 		<xs:simpleType>
 			<xs:restriction base="xs:string">
-				<xs:length value="25"/>
+				<xs:maxLength value="25"/>
 			</xs:restriction>
 		</xs:simpleType>
 	</xs:element>
@@ -58,7 +59,7 @@
 	<xs:element name="FirstName">
 		<xs:simpleType>
 			<xs:restriction base="xs:string">
-				<xs:length value="25"/>
+				<xs:maxLength value="25"/>
 			</xs:restriction>
 		</xs:simpleType>
 	</xs:element>
@@ -66,7 +67,7 @@
 	<xs:element name="MiddleName">
 		<xs:simpleType>
 			<xs:restriction base="xs:string">
-				<xs:length value="15"/>
+				<xs:maxLength value="15"/>
 			</xs:restriction>
 		</xs:simpleType>
 	</xs:element>
@@ -74,7 +75,7 @@
 	<xs:element name="LastName">
 		<xs:simpleType>
 			<xs:restriction base="xs:string">
-				<xs:length value="75"/>
+				<xs:maxLength value="75"/>
 			</xs:restriction>
 		</xs:simpleType>
 	</xs:element>
@@ -82,7 +83,7 @@
 	<xs:element name="Email">
 		<xs:simpleType>
 			<xs:restriction base="xs:string">
-				<xs:length value="100"/>
+				<xs:maxLength value="100"/>
 			</xs:restriction>
 		</xs:simpleType>
 	</xs:element>
@@ -90,7 +91,7 @@
 	<xs:element name="RegistrationCode">
 		<xs:simpleType>
 			<xs:restriction base="xs:string">
-				<xs:length value="50"/>
+				<xs:maxLength value="50"/>
 			</xs:restriction>
 		</xs:simpleType>
 	</xs:element>
