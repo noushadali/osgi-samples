@@ -2,12 +2,14 @@ package com.osgisamples.congress.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.osgi.framework.Bundle;
 import org.osgi.framework.ServiceReference;
 
 import com.osgisamples.congress.servicelocator.ServiceLocator;
@@ -24,39 +26,60 @@ public class SchemaServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/xml");
 		PrintWriter writer = response.getWriter();
 		String completeUrlPath = request.getPathInfo();
-		
 		RequestInfo requestInfo = new RequestInfo(completeUrlPath);
-		
-		if (requestInfo.getWsdl() != null) {
-			writer.write(generateWsdl(requestInfo,request));
-		} else if (requestInfo.getXsd() != null) {
-			writer.write(obtainXsd(requestInfo));
+		String requestedFolder = requestInfo.getRequestedFolder();
+		if(requestedFolder != null && !"".equals(requestedFolder) && !requestedFolder.endsWith("/")) {
+			response.setContentType("text/xml");
+			if (requestInfo.getWsdl() != null) {
+				writer.write(generateWsdl(requestInfo,request));
+			} else if (requestInfo.getXsd() != null) {
+				writer.write(obtainXsd(requestInfo));
+			} 
 		} else {
-			
+			response.setContentType("text/html");
+			writer.write(generateDirectoryListingPage(requestInfo));
 		}
-		// show directory contents
-		// other cases 
-		//    - show only files in directory ending with .xsd
-		//    - show link to generated wsdl
 		writer.close();
 	}
 	
+	private String generateDirectoryListingPage(RequestInfo requestInfo) {
+		String returnString = "<html><head><title>Directory listing</title></head><body>";
+		Bundle bundle = getBundleForRequestedService(requestInfo);
+		if(bundle != null) {
+			FileLoadingUtil fileLoadingUtil = new FileLoadingUtil();
+			if(requestInfo.getRequestedFolder() != null) {
+				fileLoadingUtil.setRootFolder(requestInfo.getRequestedFolder());
+			}
+			List<String> fileList = fileLoadingUtil.listFilesInBundle(bundle);
+			StringBuilder stringBuilder = new StringBuilder();
+			for (String file : fileList) {
+				stringBuilder.append("<a href=\"")
+					.append(file.substring(1))
+					.append("\"/>")
+					.append(file)
+					.append("</a>")
+					.append("<br>");
+			}
+			returnString = stringBuilder.toString();
+		}
+		returnString += "</body></html>"; 
+		return returnString;
+	}
+
 	private String obtainXsd(RequestInfo requestInfo) {
-		ServiceReference serviceReference = 
-			locator.findServiceReference(requestInfo.getService() + "Request", requestInfo.getVersion());
-		String xsd = null;
-		if(serviceReference != null) {
+		String returnXsd = null;
+		Bundle bundle = getBundleForRequestedService(requestInfo);
+		if(bundle != null) {
 			FileLoadingUtil fileLoadingUtil = new FileLoadingUtil();
 			try {
-				xsd = fileLoadingUtil.loadFileFromBundle(serviceReference.getBundle(), "WS-INF/" + requestInfo.getXsd());
+				returnXsd = fileLoadingUtil.loadFileFromBundle(bundle, "WS-INF/" + requestInfo.getXsd());
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
 		}
-		return xsd;
+		return returnXsd;
 	}
 
 	private String generateWsdl(RequestInfo requestInfo, HttpServletRequest request) {
@@ -65,5 +88,15 @@ public class SchemaServlet extends HttpServlet {
 		String servernameport = request.getLocalName() + ":" + request.getLocalPort();
 		String wsdl = wsdlGenerator.generatewsdl(schema, requestInfo.getService(), servernameport);
 		return wsdl;
+	}
+	
+	private Bundle getBundleForRequestedService(RequestInfo requestInfo) {
+		Bundle returnBundle = null;
+		ServiceReference serviceReference = 
+			locator.findServiceReference(requestInfo.getService() + "Request", requestInfo.getVersion());
+		if (serviceReference != null) {
+			returnBundle = serviceReference.getBundle();
+		}
+		return returnBundle;
 	}
 }
