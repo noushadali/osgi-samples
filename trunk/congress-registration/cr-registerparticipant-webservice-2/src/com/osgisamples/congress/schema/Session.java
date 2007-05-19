@@ -24,9 +24,10 @@ import javax.xml.bind.annotation.XmlType;
  * &lt;complexType>
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://dispatcher.congress.osgisamples.com}RegistrationCode"/>
- *       &lt;/sequence>
+ *       &lt;choice>
+ *         &lt;element ref="{http://dispatcher.congress.osgisamples.com}SessionId"/>
+ *         &lt;element ref="{http://dispatcher.congress.osgisamples.com}SessionName"/>
+ *       &lt;/choice>
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -36,36 +37,63 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "registrationCode"
+    "sessionId",
+    "sessionName"
 })
-@XmlRootElement(name = "CongressRegistrationResponse")
-public class CongressRegistrationResponse {
+@XmlRootElement(name = "Session")
+public class Session {
 
-    @XmlElement(name = "RegistrationCode", required = true)
-    protected String registrationCode;
+    @XmlElement(name = "SessionId")
+    protected Integer sessionId;
+    @XmlElement(name = "SessionName")
+    protected String sessionName;
 
     /**
-     * Gets the value of the registrationCode property.
+     * Gets the value of the sessionId property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getSessionId() {
+        return sessionId;
+    }
+
+    /**
+     * Sets the value of the sessionId property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setSessionId(Integer value) {
+        this.sessionId = value;
+    }
+
+    /**
+     * Gets the value of the sessionName property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getRegistrationCode() {
-        return registrationCode;
+    public String getSessionName() {
+        return sessionName;
     }
 
     /**
-     * Sets the value of the registrationCode property.
+     * Sets the value of the sessionName property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setRegistrationCode(String value) {
-        this.registrationCode = value;
+    public void setSessionName(String value) {
+        this.sessionName = value;
     }
 
 }
