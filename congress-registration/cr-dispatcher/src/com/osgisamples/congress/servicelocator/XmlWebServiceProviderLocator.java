@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
+import org.osgi.framework.Version;
 import org.osgi.util.tracker.ServiceTracker;
 
 import com.osgisamples.congress.provider.XmlWebServiceProvider;
@@ -42,22 +43,41 @@ ServiceLocator {
 
 	public ServiceReference findServiceReference(final String rootElement, final String version) {
 		ServiceReference[] refs = this.getServiceReferences();
+		ServiceReference bestReference = null;
+		
 		if(refs != null && refs.length > 0) {
 			Iterator<ServiceReference> it = Arrays.asList(refs).iterator();
 			while(it.hasNext()) {
-				ServiceReference ref = it.next();
-				if(rootElement.equals(ref.getProperty("rootElement"))) {
-					log.info("Found the right service, now check for the version");
-					if (version == null) {
-						log.info("No special version requested");
-						return ref;
-					} else if (VersionComparator.isCompatible(version, (String)ref.getProperty("version"))){
-						log.info("Found the requested version");
-						return ref;
+				ServiceReference currentReference = it.next();
+				if(rootElement.equals(currentReference.getProperty("rootElement"))) {
+					log.info("Found the right service (" + currentReference.getProperty("rootElement") + ") with version " + currentReference.getProperty("version"));
+					if (version == null || VersionComparator.isCompatible(version, (String)currentReference.getProperty("version"))) {
+						bestReference = chooseBestReference(bestReference,currentReference);
 					}
 				}
 			}
 		}
-		return null;
+		if (bestReference != null) {
+			log.info("Returning version: " + bestReference.getProperty("version"));
+		}
+		return bestReference;
+	}
+
+	private ServiceReference chooseBestReference(final ServiceReference firstReference, final ServiceReference secondReference) {
+		ServiceReference bestReference = null;
+		if (firstReference == null) {
+			bestReference = secondReference;
+		} else if (secondReference == null) {
+			bestReference = firstReference;
+		} else {
+			Version firstReferenceVersion = new Version((String)firstReference.getProperty("version"));
+			Version secondReferenceVersion = new Version((String)secondReference.getProperty("version"));
+			if (firstReferenceVersion.compareTo(secondReferenceVersion) > 0) {
+				bestReference = firstReference;
+			} else {
+				bestReference = secondReference;
+			}
+		}
+		return bestReference;
 	}
 }
