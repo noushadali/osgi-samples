@@ -28,7 +28,12 @@ ServiceLocator {
 	}
 
 	public XmlWebServiceProvider findService(final String rootElement, final String version) {
-		return (XmlWebServiceProvider) getService(findServiceReference(rootElement, version));
+		XmlWebServiceProvider serviceProvider = null;
+		ServiceReference serviceReference = findServiceReference(rootElement, version);
+		if (serviceReference != null) {
+			serviceProvider = (XmlWebServiceProvider) getService(serviceReference);
+		}
+		return serviceProvider;
 	}
 
 	public ServiceReference findServiceReference(final String rootElement) {

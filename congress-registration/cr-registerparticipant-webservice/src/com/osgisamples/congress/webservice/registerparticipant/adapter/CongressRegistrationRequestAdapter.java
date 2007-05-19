@@ -24,8 +24,11 @@ public class CongressRegistrationRequestAdapter {
 
 	private Congress adaptCongress(com.osgisamples.congress.schema.Congress xmlCongress) {
 		Congress congress = new Congress();
-		congress.setId(new Long(xmlCongress.getCongressId()));
-		congress.setName(xmlCongress.getCongressName());
+		if (xmlCongress.getCongressId() != null) {
+			congress.setId(new Long(xmlCongress.getCongressId()));
+		} else {
+			congress.setName(xmlCongress.getCongressName());
+		}
 		return congress;
 	}
 	
