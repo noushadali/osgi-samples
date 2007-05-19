@@ -29,8 +29,8 @@ public class SchemaServlet extends HttpServlet {
 		PrintWriter writer = response.getWriter();
 		String completeUrlPath = request.getPathInfo();
 		RequestInfo requestInfo = new RequestInfo(completeUrlPath);
-		String requestedFolder = requestInfo.getRequestedFolder();
-		if(requestedFolder != null && !"".equals(requestedFolder) && !requestedFolder.endsWith("/")) {
+		//String requestedFolder = requestInfo.getRequestedFolder();
+		if(requestInfo.getXsd() != null || requestInfo.getWsdl() != null) {
 			response.setContentType("text/xml");
 			if (requestInfo.getWsdl() != null) {
 				writer.write(generateWsdl(requestInfo,request));
