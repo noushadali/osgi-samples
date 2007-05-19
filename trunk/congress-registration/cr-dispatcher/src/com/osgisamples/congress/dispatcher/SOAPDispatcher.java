@@ -52,7 +52,7 @@ public class SOAPDispatcher implements Dispatcher {
 				catch (Throwable ex)
 				{
 					System.out.println("Caught an exception:");
-					ex.printStackTrace();
+					throw new SOAPException(ex);
 				}
 			}
 			else

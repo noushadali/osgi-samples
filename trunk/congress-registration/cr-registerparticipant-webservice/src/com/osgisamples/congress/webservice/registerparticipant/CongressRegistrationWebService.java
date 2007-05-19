@@ -1,7 +1,12 @@
 package com.osgisamples.congress.webservice.registerparticipant;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.ValidationEvent;
+import javax.xml.bind.helpers.DefaultValidationEventHandler;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 
 import org.osgi.util.tracker.ServiceTracker;
 import org.w3c.dom.Document;
@@ -20,11 +25,33 @@ public class CongressRegistrationWebService implements XmlWebServiceProvider {
 
 	private ServiceTracker congressManagerTracker;
 	
+	private class MyValidationEventHandler extends DefaultValidationEventHandler {
+
+		@Override
+		public boolean handleEvent(ValidationEvent ve) {
+			if (ve.getSeverity()==ValidationEvent.FATAL_ERROR ||  
+					ve .getSeverity()==ValidationEvent.ERROR){
+				throw new RuntimeException("Error validating XML: " + ve.getMessage());
+			}
+			else {
+				return true;
+			}
+		}
+
+	}
+	
 	public Document doService(final Node request) {
 		Document xmlResponse = null;
 		try {
 			JAXBContext context = JAXBContext.newInstance(CongressRegistrationResponse.class.getPackage().getName());
-			CongressRegistrationRequest requestObject = (CongressRegistrationRequest) context.createUnmarshaller().unmarshal(request);
+			
+			Unmarshaller unmarshaller = context.createUnmarshaller();
+			SchemaFactory factory = SchemaFactory.newInstance(javax.xml.XMLConstants.W3C_XML_SCHEMA_NS_URI);
+			Schema schema = factory.newSchema(getClass().getClassLoader().getResource("WS-INF/CongressRegistration.xsd"));
+			unmarshaller.setSchema(schema);
+			unmarshaller.setEventHandler(new MyValidationEventHandler());
+			
+			CongressRegistrationRequest requestObject = (CongressRegistrationRequest) unmarshaller.unmarshal(request);
 
 			CongressRegistrationResponse responseObject = registerCongress(requestObject);
 
