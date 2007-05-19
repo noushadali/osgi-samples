@@ -8,6 +8,8 @@
 
 package com.osgisamples.congress.schema;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -25,7 +27,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://dispatcher.congress.osgisamples.com}RegistrationCode"/>
+ *         &lt;element ref="{http://dispatcher.congress.osgisamples.com}Session" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,36 +38,41 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "registrationCode"
+    "session"
 })
-@XmlRootElement(name = "CongressRegistrationResponse")
-public class CongressRegistrationResponse {
+@XmlRootElement(name = "Sessions")
+public class Sessions {
 
-    @XmlElement(name = "RegistrationCode", required = true)
-    protected String registrationCode;
-
-    /**
-     * Gets the value of the registrationCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getRegistrationCode() {
-        return registrationCode;
-    }
+    @XmlElement(name = "Session", required = true)
+    protected List<Session> session;
 
     /**
-     * Sets the value of the registrationCode property.
+     * Gets the value of the session property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the session property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getSession().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Session }
+     * 
+     * 
      */
-    public void setRegistrationCode(String value) {
-        this.registrationCode = value;
+    public List<Session> getSession() {
+        if (session == null) {
+            session = new ArrayList<Session>();
+        }
+        return this.session;
     }
 
 }
