@@ -1,19 +1,26 @@
 package com.osgisamples.congress.webservice.registerparticipant;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.UnmarshalException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.ValidationEvent;
 import javax.xml.bind.helpers.DefaultValidationEventHandler;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.osgi.util.tracker.ServiceTracker;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
 
 import com.osgisamples.congress.business.CongressManager;
 import com.osgisamples.congress.provider.XmlWebServiceProvider;
+import com.osgisamples.congress.provider.exceptions.ServiceProviderException;
 import com.osgisamples.congress.schema.CongressRegistrationRequest;
 import com.osgisamples.congress.schema.CongressRegistrationResponse;
 import com.osgisamples.congress.schema.ObjectFactory;
@@ -22,7 +29,7 @@ import com.osgisamples.congress.webservice.registerparticipant.adapter.CongressR
 import com.osgisamples.congress.webservice.registerparticipant.dataholder.CongressRegistrationRequestDataHolder;
 
 public class CongressRegistrationWebService implements XmlWebServiceProvider {
-
+	private static final Log logger = LogFactory.getLog(CongressRegistrationWebService.class);
 	private ServiceTracker congressManagerTracker;
 	
 	private class MyValidationEventHandler extends DefaultValidationEventHandler {
@@ -31,9 +38,8 @@ public class CongressRegistrationWebService implements XmlWebServiceProvider {
 		public boolean handleEvent(ValidationEvent ve) {
 			if (ve.getSeverity()==ValidationEvent.FATAL_ERROR ||  
 					ve .getSeverity()==ValidationEvent.ERROR){
-				throw new RuntimeException("Error validating XML: " + ve.getMessage());
-			}
-			else {
+				return false;
+			} else {
 				return true;
 			}
 		}
@@ -42,10 +48,11 @@ public class CongressRegistrationWebService implements XmlWebServiceProvider {
 	
 	public Document doService(final Node request) {
 		Document xmlResponse = null;
+		JAXBContext context;
+		Unmarshaller unmarshaller;
 		try {
-			JAXBContext context = JAXBContext.newInstance(CongressRegistrationResponse.class.getPackage().getName());
-			
-			Unmarshaller unmarshaller = context.createUnmarshaller();
+			context = JAXBContext.newInstance(CongressRegistrationResponse.class.getPackage().getName());
+			unmarshaller = context.createUnmarshaller();
 			SchemaFactory factory = SchemaFactory.newInstance(javax.xml.XMLConstants.W3C_XML_SCHEMA_NS_URI);
 			Schema schema = factory.newSchema(getClass().getClassLoader().getResource("WS-INF/CongressRegistration.xsd"));
 			unmarshaller.setSchema(schema);
@@ -57,9 +64,20 @@ public class CongressRegistrationWebService implements XmlWebServiceProvider {
 
 			xmlResponse = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
 			context.createMarshaller().marshal(responseObject, xmlResponse);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
+		} catch (UnmarshalException e) {
+			logger.info("Unmarshal",e);
+			throw new ServiceProviderException("Unmarshal Error while parsing the xml request : " + e.getLinkedException().getMessage());
+		} catch (JAXBException e) {
+			logger.info("Jaxb",e);
+			throw new ServiceProviderException("JAXB Error while parsing the xml request : " + e.getMessage());
+		} catch (SAXException e) {
+			logger.info("Sax",e);
+			throw new ServiceProviderException("Error obtaining or reading the xsd for validating the request : " + e.getMessage());
+		} catch (ParserConfigurationException e) {
+			logger.info("ParserConfiguration",e);
+			throw new ServiceProviderException("Technical exception while configuring the response builder : " + e.getMessage());
 		}
+		
 		return xmlResponse;
 	}
 

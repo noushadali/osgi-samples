@@ -13,7 +13,7 @@ public class CongressDaoImpl extends BaseDao implements CongressDao {
 		try {
 			foundCongress = getPersistentStorage().loadCongressById(congressId);
 		} catch (ObjectNotFoundException e) {
-			throw new ObjectRetrievalFailureException(Congress.class,e.getMessage());
+			throw new ObjectRetrievalFailureException(Congress.class,congressId.toString());
 		}
 		return foundCongress;
 	}
@@ -23,7 +23,7 @@ public class CongressDaoImpl extends BaseDao implements CongressDao {
 		try {
 			foundCongress = getPersistentStorage().loadCongressByName(congressName);
 		} catch (ObjectNotFoundException e) {
-			throw new ObjectRetrievalFailureException(Congress.class,e.getMessage());
+			throw new ObjectRetrievalFailureException(Congress.class,congressName);
 		}
 		return foundCongress;
 	}

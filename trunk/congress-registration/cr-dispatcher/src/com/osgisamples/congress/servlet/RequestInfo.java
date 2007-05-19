@@ -3,6 +3,8 @@ package com.osgisamples.congress.servlet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.osgisamples.congress.provider.exceptions.ServiceProviderException;
+
 public class RequestInfo {
 	private final Pattern urlPattern = Pattern.compile("(?:/([^/]*)(?:/([^/]*)(?:/(.*))?)?)?");
 	private String version;
@@ -14,7 +16,7 @@ public class RequestInfo {
 	public RequestInfo(final String pathInfo) {
 		Matcher matcher = urlPattern.matcher(pathInfo);
 		if(!matcher.find()) {
-			throw new RuntimeException("Wrong URL");
+			throw new ServiceProviderException("Provided URL does not match the expected format : e.g. /ServiceName/version/ServiceName.wsdl");
 		}
 		this.service = matcher.group(1);
 		this.version = matcher.group(2);

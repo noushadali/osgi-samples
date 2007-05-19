@@ -60,7 +60,11 @@ public class CongressManagerImpl implements CongressManager {
 	private Congress loadCongress(Congress searchCongress) throws CongressNotFoundException {
 		Congress congress;
 		try {
-			congress = congressDao.loadCongressByName(searchCongress.getName());
+			if (searchCongress.getId() != null) {
+				congress = congressDao.loadCongress(searchCongress.getId());
+			} else {
+				congress = congressDao.loadCongressByName(searchCongress.getName());
+			}
 		} catch (ObjectRetrievalFailureException e) {
 			logger.info(e.getMessage());
 			throw new CongressNotFoundException(e.getMessage());

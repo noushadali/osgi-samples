@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.ServiceReference;
 
+import com.osgisamples.congress.provider.exceptions.ServiceProviderException;
 import com.osgisamples.congress.servicelocator.ServiceLocator;
 import com.osgisamples.congress.utils.FileLoadingUtil;
 import com.osgisamples.congress.wsdlgenerator.WsdlGenerator;
@@ -76,7 +77,7 @@ public class SchemaServlet extends HttpServlet {
 			try {
 				returnXsd = fileLoadingUtil.loadFileFromBundle(bundle, "WS-INF/" + requestInfo.getXsd());
 			} catch (IOException e) {
-				throw new RuntimeException(e);
+				throw new ServiceProviderException("Problem while obtaining xsd", e);
 			}
 		}
 		return returnXsd;
@@ -85,8 +86,9 @@ public class SchemaServlet extends HttpServlet {
 	private String generateWsdl(RequestInfo requestInfo, HttpServletRequest request) {
 		WsdlGenerator wsdlGenerator = new WsdlGenerator();
 		String schema = requestInfo.getService() + ".xsd";
+		String version = requestInfo.getVersion();
 		String servernameport = request.getLocalName() + ":" + request.getLocalPort();
-		String wsdl = wsdlGenerator.generatewsdl(schema, requestInfo.getService(), servernameport);
+		String wsdl = wsdlGenerator.generatewsdl(schema, requestInfo.getService(),version, servernameport);
 		return wsdl;
 	}
 	

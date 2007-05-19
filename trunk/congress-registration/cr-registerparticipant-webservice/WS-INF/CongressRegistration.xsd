@@ -10,7 +10,7 @@
 				<xs:element ref="Congress" />
 				<xs:element ref="Registrant" />
 			</xs:sequence>
-			<xs:attribute name="version" type="xs:string" use="required"/>
+			<xs:attribute name="version" type="xs:string" use="optional"/>
 		</xs:complexType>
 	</xs:element>
 
@@ -24,10 +24,10 @@
 
 	<xs:element name="Congress">
 		<xs:complexType>
-			<xs:sequence>
+			<xs:choice>
 				<xs:element ref="CongressId"/>
 				<xs:element ref="CongressName"/>
-			</xs:sequence>
+			</xs:choice>
 		</xs:complexType>
 	</xs:element>
 
@@ -95,5 +95,4 @@
 			</xs:restriction>
 		</xs:simpleType>
 	</xs:element>
-
 </xs:schema>
