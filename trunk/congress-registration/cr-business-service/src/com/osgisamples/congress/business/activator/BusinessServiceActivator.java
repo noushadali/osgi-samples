@@ -12,6 +12,7 @@ import com.osgisamples.congress.business.CongressManager;
 import com.osgisamples.congress.business.impl.CongressManagerImpl;
 import com.osgisamples.congress.dataaccess.CongressDao;
 import com.osgisamples.congress.dataaccess.RegistrantDao;
+import com.osgisamples.congress.dataaccess.SessionDao;
 
 public class BusinessServiceActivator implements BundleActivator {
 	private final static Log logger = LogFactory.getLog(BusinessServiceActivator.class);
@@ -22,7 +23,9 @@ public class BusinessServiceActivator implements BundleActivator {
 		CongressDao congressDao = (CongressDao)context.getService(congressDaoReference);
 		ServiceReference registrantDaoReference = context.getServiceReference(RegistrantDao.class.getName());
 		RegistrantDao registrantDao = (RegistrantDao)context.getService(registrantDaoReference);
-		Object service = new CongressManagerImpl(congressDao,registrantDao);
+		ServiceReference sessionDaoReference = context.getServiceReference(SessionDao.class.getName());
+		SessionDao sessionDao = (SessionDao)context.getService(sessionDaoReference );
+		Object service = new CongressManagerImpl(congressDao,registrantDao,sessionDao);
 		Properties props =  new Properties();
 //		props.put("version", context.getBundle().getHeaders().get("version"));
 		context.registerService(CongressManager.class.getName(), service, props);		

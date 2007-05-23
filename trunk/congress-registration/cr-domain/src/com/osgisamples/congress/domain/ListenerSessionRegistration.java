@@ -9,12 +9,15 @@ public class ListenerSessionRegistration extends SessionRegistration {
 
 	private Participant listener;
 
-	public Participant getListener() {
-		return listener;
+	public ListenerSessionRegistration(Session session, Participant listener) {
+		super(session);
+		session.getListeners().add(this);
+		this.listener = listener;
 	}
 
-	public void setListener(Participant listener) {
-		this.listener = listener;
+
+	public Participant getListener() {
+		return listener;
 	}
 
 	@Override

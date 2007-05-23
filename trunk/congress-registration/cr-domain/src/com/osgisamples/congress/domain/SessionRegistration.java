@@ -7,12 +7,12 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 public abstract class SessionRegistration extends BaseDomain {
 	private Session registeredSession;
 
+	public SessionRegistration(Session session) {
+		this.registeredSession = session;
+	}
+	
 	public Session getRegisteredSession() {
 		return registeredSession;
-	}
-
-	public void setRegisteredSession(Session registeredSession) {
-		this.registeredSession = registeredSession;
 	}
 
 	@Override
