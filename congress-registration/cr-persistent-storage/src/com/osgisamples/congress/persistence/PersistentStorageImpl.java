@@ -5,9 +5,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.osgisamples.congress.dataaccess.exceptions.SessionAllreadyExistsException;
+import com.osgisamples.congress.dataaccess.exceptions.SessionValidationException;
 import com.osgisamples.congress.domain.Congress;
 import com.osgisamples.congress.domain.CongressRegistration;
+import com.osgisamples.congress.domain.ListenerSessionRegistration;
+import com.osgisamples.congress.domain.Participant;
 import com.osgisamples.congress.domain.Registrant;
+import com.osgisamples.congress.domain.Session;
 
 public class PersistentStorageImpl {
 	private static PersistentStorageImpl storageInstance;
@@ -17,7 +22,7 @@ public class PersistentStorageImpl {
 	
 	private PersistentStorageImpl() {
 		Congress nljug = new Congress();
-		nljug.setId(1L);
+		nljug.setId(myIdGenerator.nextId());
 		nljug.setName("NLJug");
 		nljug.setDescription("This is the biggest java conference from the netherlands");
 		nljug.setStartDateTime(new GregorianCalendar(2007,5,18,9,0));
@@ -27,11 +32,21 @@ public class PersistentStorageImpl {
 		Registrant allard = new Registrant();
 		allard.setCompany("Accenture Technology Solutions");
 		allard.setEmailAddress("allard.buijze@accenture.com");
-		allard.setId(1L);
+		allard.setId(myIdGenerator.nextId());
 		allard.setRegistrationNumber("1000001");
 		allard.setName("Allard Buijze");
-		
+		Participant allardAsParticipant = new Participant(allard);
+		allardAsParticipant.setId(myIdGenerator.nextId());
+		allard.getCongressRoles().add(allardAsParticipant);
 		new CongressRegistration(nljug,allard);
+		
+		Session osgiwebservices = new Session();
+		osgiwebservices.setId(myIdGenerator.nextId());
+		osgiwebservices.setName("OSGi and web service versioning");
+		osgiwebservices.setSummary("This presentation explains everything about web service versioning and osgi");
+		osgiwebservices.setCongress(nljug);
+		nljug.getSessions().add(osgiwebservices);
+		new ListenerSessionRegistration(osgiwebservices,allardAsParticipant);
 	}
 	
 	public static PersistentStorageImpl getInstance() {
@@ -103,6 +118,9 @@ public class PersistentStorageImpl {
 			if (existingRegistrant == null) {
 				registrant.setId(myIdGenerator.nextId());
 				registrant.setRegistrationNumber(String.valueOf(1000000L+registrant.getId().longValue()));
+				Participant participant = new Participant(registrant);
+				participant.setId(myIdGenerator.nextId());
+				registrant.getCongressRoles().add(participant);
 				registrants.put(registrant.getId(), registrant);
 			} else {
 				registrant.setCompany(existingRegistrant.getCompany());
@@ -131,6 +149,22 @@ public class PersistentStorageImpl {
 			congress.setId(myIdGenerator.nextId());
 		}
 		congresses.put(congress.getId(), congress);
+	}
+	
+	public void createSession(Session session) {
+		if (session.getId() != null) {
+			throw new SessionAllreadyExistsException("The session has an id which is not possible for a new session");
+		}
+		if (session.getCongress() == null) {
+			throw new SessionValidationException("A new session must have a congress");
+		}
+		if (session.getName() == null || "".equals(session.getName())) {
+			throw new SessionValidationException("A new session must have a name");
+		}
+		Congress foundCongress = loadCongressById(session.getCongress().getId());
+		session.setId(myIdGenerator.nextId());
+		session.setCongress(foundCongress);
+		foundCongress.getSessions().add(session);
 	}
 	
 	private class IdGenerator {

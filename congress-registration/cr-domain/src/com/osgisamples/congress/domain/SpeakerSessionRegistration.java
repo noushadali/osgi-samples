@@ -9,12 +9,13 @@ public class SpeakerSessionRegistration extends SessionRegistration {
 
 	private Speaker speaker;
 
-	public Speaker getSpeaker() {
-		return speaker;
+	public SpeakerSessionRegistration(Session session, Speaker speaker) {
+		super(session);
+		this.speaker = speaker;
 	}
 
-	public void setSpeaker(Speaker speaker) {
-		this.speaker = speaker;
+	public Speaker getSpeaker() {
+		return speaker;
 	}
 
 	@Override

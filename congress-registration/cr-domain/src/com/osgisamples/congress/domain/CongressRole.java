@@ -8,12 +8,12 @@ public abstract class CongressRole extends BaseDomain {
 	private Long id;
 	private Registrant registrant;
 	
+	public CongressRole(Registrant registrant) {
+		this.registrant = registrant;
+	}
+	
 	public Registrant getRegistrant() {
 		return registrant;
-	}
-
-	public void setRegistrant(Registrant registrant) {
-		this.registrant = registrant;
 	}
 
 	public Long getId() {

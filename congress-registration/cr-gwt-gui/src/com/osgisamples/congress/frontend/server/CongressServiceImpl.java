@@ -47,36 +47,5 @@ public class CongressServiceImpl extends RemoteServiceServlet implements
 			returnRegistrant.setRegistrationNumber(registrant.getRegistrationNumber());
 			returnRegistrants.add(returnRegistrant);
 		}
-	}
-	
-//	public ArrayList listRegistrants() {
-//		ArrayList listOfRegistrants = new ArrayList();
-//		try {
-//	        BufferedReader in = new BufferedReader(new FileReader("D:\\data\\projects\\osgi-samples-google\\trunk\\congress-registration\\cr-gwt-gui\\registrants.txt"));
-//	        String str;
-//	        while ((str = in.readLine()) != null) {
-//	        	listOfRegistrants.add(process(str));
-//	        }
-//	        in.close();
-//	    } catch (IOException e) {
-//	    	e.printStackTrace();
-//	    }		
-//		return listOfRegistrants;
-//	}
-//
-//	private Registrant process(String lineFromFile) {
-//		Registrant registrant = new Registrant();
-//		
-//		StringTokenizer tokenizer = new StringTokenizer(lineFromFile,"#");
-//		if (tokenizer.countTokens() != 5) {
-//			throw new RuntimeException("Number of tokens not correct");
-//		}
-//		registrant.setId(new Long(tokenizer.nextToken()));
-//		registrant.setName(tokenizer.nextToken());
-//		registrant.setCompany(tokenizer.nextToken());
-//		registrant.setEmailAddress(tokenizer.nextToken());
-//		registrant.setRegistrationNumber(tokenizer.nextToken());
-//		
-//		return registrant;
-//	}
+	}	
 }
