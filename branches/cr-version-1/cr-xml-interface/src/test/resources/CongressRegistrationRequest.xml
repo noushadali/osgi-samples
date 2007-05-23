@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CongressRegistrationRequest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../main/resources/CongressRegistration.xsd">
+  <Congress>
+    <CongressId>0</CongressId>
+    <CongressName>CongressName</CongressName>
+  </Congress>
+  <Registrant>
+    <FirstName>FirstName</FirstName>
+    <MiddleName>MiddleName</MiddleName>
+    <LastName>LastName</LastName>
+    <Email>Email</Email>
+  </Registrant>
+</CongressRegistrationRequest>

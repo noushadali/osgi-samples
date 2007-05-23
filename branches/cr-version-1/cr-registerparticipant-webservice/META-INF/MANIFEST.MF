@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: RegisterParticipant Web Service
+Bundle-SymbolicName: cr_registerparticipant_webservice
+Bundle-Version: 1.1.0
+Bundle-Activator: com.osgisamples.congress.webservice.registerparticipant.Activator
+Bundle-Localization: plugin
+Import-Package: com.osgisamples.congress.business;version="[1.0.0,2.0.0)",
+ com.osgisamples.congress.domain;version="[1.0.0,2.0.0)",
+ com.osgisamples.congress.provider,
+ com.osgisamples.congress.provider.exceptions,
+ org.apache.commons.logging,
+ org.apache.commons.logging.impl,
+ org.osgi.framework;version="1.3.0",
+ org.osgi.util.tracker;version="1.3.2"
+Bundle-ClassPath: jaxb-api-2.0.jar,
+ jaxb-impl-2.0.2.jar,
+ jsr173_api-1.0.jar,
+ .,
+ activation-1.1.jar
