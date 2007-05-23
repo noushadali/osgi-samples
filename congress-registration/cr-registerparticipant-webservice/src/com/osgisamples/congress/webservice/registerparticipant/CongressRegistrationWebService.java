@@ -100,15 +100,6 @@ public class CongressRegistrationWebService implements XmlWebServiceProvider {
 			String registrantNumber = service.registerNewRegistrantForCongress(dh.getRegistrant(), dh.getCongress());
 			service.updateSessionsForParticipantOfCongress(dh.getCongress(), dh.getRegistrant(), dh.getSessions());
 			
-			// TODO to be removed
-			
-			Set<Session> sessions = service.listAllSessionsForCongress(dh.getCongress());
-			for (Session session : sessions) {
-				logger.info("session : " + session.getName());
-				logger.info("listeners : " + session.getListeners().size());
-			}
-			// till here
-			
 			CongressRegistrationResponseAdapter responseAdapter = new CongressRegistrationResponseAdapter();
 			responseAdapter.setRegistrantIdentificationNumber(registrantNumber);
 			response = responseAdapter.createOkResponse();
