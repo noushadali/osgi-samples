@@ -4,18 +4,25 @@ body {
 	background : #fff;
 }
 
-.registrants-title {
+.title {
 	border-bottom : 1px solid #000;
 	text-align : center;
 	background-color : #ffcc00;
 }
-.registrants-widget {
+.widget {
 	border : 1px solid silver;
 }
 
-.registrants-grid {
+.grid {
 }
 
-.registrants-column {
+.header-column {
 	font-weight : bold;
+}
+
+.header-column {
+	font-weight : bold;
+}
+.numlisteners {
+	margin-left : 50px;
 }

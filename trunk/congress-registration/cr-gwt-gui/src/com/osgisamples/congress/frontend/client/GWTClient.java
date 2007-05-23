@@ -13,6 +13,8 @@ public class GWTClient implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
+		ShowSessionsComponent sessionsComponent = new ShowSessionsComponent();
+		RootPanel.get().add(sessionsComponent);
 		ShowRegistrantsComponent component = new ShowRegistrantsComponent();
 		RootPanel.get().add(component);
 	}

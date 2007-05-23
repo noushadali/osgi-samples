@@ -12,25 +12,25 @@ import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class ShowRegistrantsComponent extends UpdateableComposite {
+public class ShowSessionsComponent extends UpdateableComposite {
 	private Panel composite = new VerticalPanel();
-	private Label titleBar = new Label("Registrants");
-	private Grid registrantsGrid;
+	private Label titleBar = new Label("Sessions");
+	private Grid sessionsGrid;
 
-	public ShowRegistrantsComponent() {
+	public ShowSessionsComponent() {
 		initWidget(composite);
 		composite.setStyleName("widget");
 		titleBar.setStyleName("title");
 		composite.add(titleBar);
-		getRegistrantsFromServer();
+		getSessionsFromServer();
 		startUpdateTimer(1);
 	}
 
 	public void update() {
-		getRegistrantsFromServer();
+		getSessionsFromServer();
 	}
-	
-	private void getRegistrantsFromServer() {
+
+	private void getSessionsFromServer() {
 		CongressServiceAsync serviceproxy = (CongressServiceAsync) GWT.create(CongressService.class);
 		ServiceDefTarget target = (ServiceDefTarget) serviceproxy;
 		target.setServiceEntryPoint(GWT.getModuleBaseURL() + "registrants");
@@ -41,45 +41,47 @@ public class ShowRegistrantsComponent extends UpdateableComposite {
 			}
 
 			public void onSuccess(Object result) {
-				ArrayList registrants = (ArrayList) result;
-				showRegistrantsComponent(registrants);
+				ArrayList sessions = (ArrayList) result;
+				showSessionsComponent(sessions);
 			}
 		};
-		serviceproxy.listRegistrants(callback);
+		serviceproxy.listSessions(callback);
 		
 	}
 	
-	private void showRegistrantsComponent(ArrayList registrants) {
-		if (registrantsGrid != null) {
-			composite.remove(registrantsGrid);
+	private void showSessionsComponent(ArrayList sessions) {
+		if (sessionsGrid != null) {
+			composite.remove(sessionsGrid);
 		}
-		if (registrants != null && !registrants.isEmpty()) {
-			registrantsGrid = new Grid(registrants.size()+1,2);
-			registrantsGrid.addStyleName("grid");
+		if (sessions != null && !sessions.isEmpty()) {
+			sessionsGrid = new Grid(sessions.size()+1,2);
+			sessionsGrid.addStyleName("grid");
 			Label columnName = new Label("Name");
 			columnName.setStyleName("header-column");
-			Label columnRegNumber = new Label("Registrantion number");
-			columnRegNumber.setStyleName("header-column");
-			addRowToGrid(columnName, columnRegNumber, 0);
+			Label columnNumListeners = new Label("Number of listeners");
+			columnNumListeners.setStyleName("header-column");
+			addRowToGrid(columnName, columnNumListeners, 0);
 			int rowNum = 0;
-			for (Iterator rows = registrants.iterator(); rows.hasNext();) {
+			for (Iterator rows = sessions.iterator(); rows.hasNext();) {
 				rowNum++;
-				Registrant registrant = (Registrant)rows.next();
-				Label labelName = new Label(registrant.getName());
-				Label labelRegNumber = new Label(registrant.getRegistrationNumber());
-				addRowToGrid(labelName, labelRegNumber, rowNum);
+				Session session = (Session)rows.next();
+				Label labelName = new Label(session.getName());
+				Label labelNumListener = new Label(String.valueOf(session.getNumListeners()));
+				labelNumListener.setStyleName("numlisteners");
+				addRowToGrid(labelName, labelNumListener, rowNum);
 			}
 		}
-		composite.add(registrantsGrid);
+		composite.add(sessionsGrid);
 	}
 	
 	private void addRowToGrid(Widget widgetName, Widget widgetNumber, int row) {
-		registrantsGrid.setWidget(row, 0, widgetName);
-		registrantsGrid.setWidget(row, 1, widgetNumber);
+		sessionsGrid.setWidget(row, 0, widgetName);
+		sessionsGrid.setWidget(row, 1, widgetNumber);
 	}
 	
 	private void addRowToGrid(String name, String number, int row) {
-		registrantsGrid.setText(row, 0, name);
-		registrantsGrid.setText(row, 1, number);
+		sessionsGrid.setText(row, 0, name);
+		sessionsGrid.setText(row, 1, number);
 	}
+
 }
