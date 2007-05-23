@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: RegisterParticipant Web Service
 Bundle-SymbolicName: cr_registerparticipant_webservice
-Bundle-Version: 1.1.0
+Bundle-Version: 2.0.0
 Bundle-Activator: com.osgisamples.congress.webservice.registerparticipant.Activator
 Bundle-Localization: plugin
 Import-Package: com.osgisamples.congress.business;version="[1.0.0,2.0.0)",

@@ -9,6 +9,7 @@
 			<xs:sequence minOccurs="1">
 				<xs:element ref="Congress" />
 				<xs:element ref="Registrant" />
+				<xs:element ref="Sessions" />
 			</xs:sequence>
 			<xs:attribute name="version" type="xs:string" use="optional"/>
 		</xs:complexType>
@@ -93,6 +94,37 @@
 			<xs:restriction base="xs:string">
 				<xs:maxLength value="50"/>
 			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	
+	<xs:element name="Sessions">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Session" minOccurs="1" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="Session">
+		<xs:complexType>
+			<xs:choice>
+				<xs:element ref="SessionId"/>
+				<xs:element ref="SessionName"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="SessionName">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="100"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	
+	<xs:element name="SessionId">
+		<xs:simpleType>
+			<xs:restriction base="xs:int"/>
 		</xs:simpleType>
 	</xs:element>
 </xs:schema>
