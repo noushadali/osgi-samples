@@ -33,12 +33,23 @@ public class PersistentStorageImpl {
 		allard.setCompany("Accenture Technology Solutions");
 		allard.setEmailAddress("allard.buijze@accenture.com");
 		allard.setId(myIdGenerator.nextId());
-		allard.setRegistrationNumber("1000001");
+		allard.setRegistrationNumber(String.valueOf(1000000L + allard.getId()));
 		allard.setName("Allard Buijze");
 		Participant allardAsParticipant = new Participant(allard);
 		allardAsParticipant.setId(myIdGenerator.nextId());
 		allard.getCongressRoles().add(allardAsParticipant);
 		new CongressRegistration(nljug,allard);
+
+		Registrant jettro = new Registrant();
+		jettro.setCompany("Accenture Technology Solutions");
+		jettro.setEmailAddress("jettro.coenradie@accenture.com");
+		jettro.setId(myIdGenerator.nextId());
+		jettro.setRegistrationNumber(String.valueOf(1000000L + jettro.getId()));
+		jettro.setName("Jettro Coenradie");
+		Participant jettroAsParticipant = new Participant(jettro);
+		jettroAsParticipant.setId(myIdGenerator.nextId());
+		jettro.getCongressRoles().add(jettroAsParticipant);
+		new CongressRegistration(nljug,jettro);
 		
 		Session osgiwebservices = new Session();
 		osgiwebservices.setId(myIdGenerator.nextId());
@@ -47,7 +58,15 @@ public class PersistentStorageImpl {
 		osgiwebservices.setCongress(nljug);
 		nljug.getSessions().add(osgiwebservices);
 		new ListenerSessionRegistration(osgiwebservices,allardAsParticipant);
-	}
+		new ListenerSessionRegistration(osgiwebservices,jettroAsParticipant);
+
+		Session osgiEnterprise = new Session();
+		osgiEnterprise.setId(myIdGenerator.nextId());
+		osgiEnterprise.setName("Enterprise OSGi");
+		osgiEnterprise.setSummary("What can OSGi mean to the enterprise");
+		osgiEnterprise.setCongress(nljug);
+		nljug.getSessions().add(osgiEnterprise);
+}
 	
 	public static PersistentStorageImpl getInstance() {
 		if (storageInstance == null) {
