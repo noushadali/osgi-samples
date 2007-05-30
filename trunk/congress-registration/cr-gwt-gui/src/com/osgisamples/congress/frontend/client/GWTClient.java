@@ -21,16 +21,36 @@ public class GWTClient implements EntryPoint {
 	public void onModuleLoad() {
 		DockPanel dockPanel = new DockPanel();
 		dockPanel.setStyleName("dock");
-
-		dockPanel.add(getTopPanel(),DockPanel.NORTH);
+		Panel toppanel = getTopPanel();
+		Panel bottompanel = getBottomPanel();
+		dockPanel.add(toppanel,DockPanel.NORTH);
+		dockPanel.setCellHeight(toppanel, "50px");
 		dockPanel.add(getCenterPanel(), DockPanel.CENTER);
-		dockPanel.add(getBottomPanel(),DockPanel.SOUTH);
+		dockPanel.add(bottompanel,DockPanel.SOUTH);
+		dockPanel.setCellHeight(bottompanel, "50px");
+		dockPanel.add(getMenupanel(), DockPanel.WEST);
 		RootPanel.get().add(dockPanel);
 	}
 
+	private Panel getMenupanel() {
+		VerticalPanel menuPanel = new VerticalPanel();
+		menuPanel.setStyleName("menu");
+		menuPanel.add(createMenuItem("NLJug J-Spring 2007"));
+		menuPanel.add(createMenuItem("SpringOne 2007"));
+		menuPanel.add(createMenuItem("NLJug J-Fall 2007"));
+		menuPanel.add(createMenuItem("Spring Experience 2007"));
+		return menuPanel;
+	}
+	private Label createMenuItem(String text) {
+		Label menuPanelItem = new Label(text);
+		menuPanelItem.setStyleName("menuitem");
+		return menuPanelItem;
+	}
+	
 	private Panel getCenterPanel() {
 		VerticalPanel centerPanel = new VerticalPanel();
 		centerPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		centerPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_TOP);
 		centerPanel.setWidth("100%");
 		Label centerPanelTitle = new Label("NLJug J-Spring 2007");
 		centerPanelTitle.setStyleName("title");
@@ -50,6 +70,7 @@ public class GWTClient implements EntryPoint {
 		Image osgisamplesLogo = new Image("osgisampleslogo.jpg");
 		HorizontalPanel topDockItem = new HorizontalPanel();
 		topDockItem.setWidth("100%");
+		topDockItem.setHeight("50px");
 		topDockItem.setStyleName("pagetitle");
 		topDockItem.add(topLabel);
 		topDockItem.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
