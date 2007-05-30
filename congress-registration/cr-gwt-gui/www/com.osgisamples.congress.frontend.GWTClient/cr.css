@@ -13,7 +13,6 @@ body {
 	text-align : center;
 	font-color : #ff0000;
 	font-size : 18px;
-	height : 40px;
 	background-color : white;
 }
 .title {
@@ -27,6 +26,20 @@ body {
 	font-style: italic;
 	height : 10 px;
 	border-top: 1px solid #000;
+}
+.menu {
+	border : 1px solid black;
+	margin : 5px;
+	padding : 5px;
+	background-color : white;
+	width: 90%;
+}
+.menuitem {
+	text-decoration: underline;	
+}
+.menuitem:HOVER {
+	text-decoration: none;
+	background-color : red;
 }
 .widget {
 	border : 1px solid black;
