@@ -1,7 +1,0 @@
-1#Allard Buijze#Accenture Technology Solutions#allard.buijze@accenture.com#100001
-2#Jettro Coenradie#Accenture Technology Solutions#jettro.coenradie@accenture.com#100002
-3#Goran Nikolic#Accenture Technology Solutions#goran.nikolic@accenture.com#100003
-4#Freddie van Rijswijk#Accenture Technology Solutions#freddie.van.rijswijk@accenture.com#100004
-5#Ben Tels#Accenture Technology Solutions#ben.tels@accenture.com#100005
-6#Robin Schaap#Accenture Technology Solutions#robin.schaap@accenture.com#100006
-7#Klaas Hauwert#Accenture Technology Solutions#klaas.hauwert@accenture.com#100007
