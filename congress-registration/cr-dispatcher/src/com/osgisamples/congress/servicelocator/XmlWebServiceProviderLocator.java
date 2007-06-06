@@ -1,8 +1,5 @@
 package com.osgisamples.congress.servicelocator;
 
-import java.util.Arrays;
-import java.util.Iterator;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.osgi.framework.BundleContext;
@@ -19,8 +16,12 @@ ServiceLocator {
 	
 	private static final Log log = LogFactory.getLog(XmlWebServiceProviderLocator.class);
 
-	public XmlWebServiceProviderLocator(BundleContext bundleContext) throws InvalidSyntaxException {
-		super(bundleContext, bundleContext.createFilter("(&(objectClass=" + XmlWebServiceProvider.class.getName() + ")(rootElement=*))"), null);
+	public XmlWebServiceProviderLocator(final BundleContext bundleContext) throws InvalidSyntaxException {
+		super(
+				bundleContext, 
+				bundleContext.createFilter("(&(objectClass=" + XmlWebServiceProvider.class.getName() + ")(rootElement=*))"), 
+				null
+			);
 		open();
 	}
 
@@ -42,16 +43,14 @@ ServiceLocator {
 	}
 
 	public ServiceReference findServiceReference(final String rootElement, final String version) {
-		ServiceReference[] refs = this.getServiceReferences();
+		ServiceReference[] serviceReferences = this.getServiceReferences();
 		ServiceReference bestReference = null;
 		
-		if(refs != null && refs.length > 0) {
-			Iterator<ServiceReference> it = Arrays.asList(refs).iterator();
-			while(it.hasNext()) {
-				ServiceReference currentReference = it.next();
+		if(serviceReferences != null && serviceReferences.length > 0) {
+			for(ServiceReference currentReference : serviceReferences) {
 				if(rootElement.equals(currentReference.getProperty("rootElement"))) {
 					log.info("Found the right service (" + currentReference.getProperty("rootElement") + ") with version " + currentReference.getProperty("version"));
-					if (version == null || VersionComparator.isCompatible(version, (String)currentReference.getProperty("version"))) {
+					if (version == null	|| VersionComparator.isCompatible(version, (String)currentReference.getProperty("version"))) {
 						bestReference = chooseBestReference(bestReference,currentReference);
 					}
 				}
