@@ -56,7 +56,6 @@ public class Stand extends BaseDomain {
 
 	@Override
 	public int hashCode() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
