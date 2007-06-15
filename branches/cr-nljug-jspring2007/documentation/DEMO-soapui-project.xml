@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project name="DEMO" soapui-version="1.6" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="ProjectSettings@projectRoot">D:\workspaces\osgi\congress-registration\documentation</con:setting></con:settings><con:interface name="congressSoapBinding" bindingName="{http://www.osgisamples.com/services/doservice}congressSoapBinding" soapVersion="1_1" definition="http://localhost:81/wsdl/CongressRegistration/2/CongressRegistration.wsdl"><con:settings/><con:endpoints><con:endpoint>http://localhost:81/services/congress</con:endpoint></con:endpoints><con:operation action="" name="doCongressRegistration_2" bindingOperationName="doCongressRegistration_2" inputName="" isOneWay="false" receivesAttachments="false" sendsAttachments="false"><con:settings/><con:call name="DEMO_1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:81/services/congress</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:dis="http://dispatcher.congress.osgisamples.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <dis:CongressRegistrationRequest version="1">
+         <dis:Congress>
+            <dis:CongressName>NLJug</dis:CongressName>
+         </dis:Congress>
+         <dis:Registrant>
+            <dis:FirstName>Freddie</dis:FirstName>
+	    <dis:MiddleName>van</dis:MiddleName>
+            <dis:LastName>Rijswijk</dis:LastName>
+            <dis:Email>freddie.van.rijswijk@accenture.com</dis:Email>
+         </dis:Registrant>
+      </dis:CongressRegistrationRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request></con:call><con:call name="DEMO_2" wssPasswordType=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:81/services/congress</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:dis="http://dispatcher.congress.osgisamples.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <dis:CongressRegistrationRequest version="2">
+         <dis:Congress>
+            <dis:CongressName>NLJug</dis:CongressName>
+         </dis:Congress>
+         <dis:Registrant>
+            <dis:FirstName>Cees</dis:FirstName>
+	    <dis:MiddleName>van</dis:MiddleName>
+            <dis:LastName>Wijk</dis:LastName>
+            <dis:Email>cees.van.wijk@accenture.com</dis:Email>
+         </dis:Registrant>
+         <dis:Sessions>
+            <dis:Session>
+               <dis:SessionName>OSGi and web service versioning</dis:SessionName>
+            </dis:Session>
+            <dis:Session>
+               <dis:SessionName>Enterprise OSGi</dis:SessionName>
+            </dis:Session>
+         </dis:Sessions>
+      </dis:CongressRegistrationRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request></con:call><con:call name="DEMO_3" wssPasswordType=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:81/services/congress</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:dis="http://dispatcher.congress.osgisamples.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <dis:CongressRegistrationRequest version="2">
+         <dis:Congress>
+            <dis:CongressName>NLJug</dis:CongressName>
+         </dis:Congress>
+         <dis:Registrant>
+            <dis:FirstName>Ben</dis:FirstName>
+            <dis:LastName>Tels</dis:LastName>
+            <dis:Email>ben.tels@accenture.com</dis:Email>
+         </dis:Registrant>
+      </dis:CongressRegistrationRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request></con:call></con:operation><con:definitionCache rootPart="http://localhost:81/wsdl/CongressRegistration/2/CongressRegistration.wsdl"><con:part><con:url>http://localhost:81/wsdl/CongressRegistration/2/CongressRegistration.xsd</con:url><con:content><xs:schema targetNamespace="http://dispatcher.congress.osgisamples.com" elementFormDefault="unqualified" attributeFormDefault="unqualified" xmlns="http://dispatcher.congress.osgisamples.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="CongressRegistrationRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element ref="Congress"/>
+				<xs:element ref="Registrant"/>
+				<xs:element ref="Sessions"/>
+			</xs:sequence>
+			<xs:attribute name="version" type="xs:string" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="CongressRegistrationResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RegistrationCode"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="Congress">
+		<xs:complexType>
+			<xs:choice>
+				<xs:element ref="CongressId"/>
+				<xs:element ref="CongressName"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="CongressName">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="25"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+
+	<xs:element name="CongressId">
+		<xs:simpleType>
+			<xs:restriction base="xs:int"/>
+		</xs:simpleType>
+	</xs:element>
+
+	<xs:element name="Registrant">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="FirstName"/>
+				<xs:element ref="MiddleName" maxOccurs="1" minOccurs="0"/>
+				<xs:element ref="LastName"/>
+				<xs:element ref="Email"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="FirstName">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="25"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+
+	<xs:element name="MiddleName">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="15"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+
+	<xs:element name="LastName">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="75"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+
+	<xs:element name="Email">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="100"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+
+	<xs:element name="RegistrationCode">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="50"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	
+	<xs:element name="Sessions">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Session" minOccurs="1" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="Session">
+		<xs:complexType>
+			<xs:choice>
+				<xs:element ref="SessionId"/>
+				<xs:element ref="SessionName"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="SessionName">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="100"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	
+	<xs:element name="SessionId">
+		<xs:simpleType>
+			<xs:restriction base="xs:int"/>
+		</xs:simpleType>
+	</xs:element>
+</xs:schema></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>http://localhost:81/wsdl/CongressRegistration/2/CongressRegistration.wsdl</con:url><con:content><definitions targetNamespace="http://www.osgisamples.com/services/doservice" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:doservice="http://dispatcher.congress.osgisamples.com" xmlns:curr="http://www.osgisamples.com/services/doservice">	<types>		<xs:schema>			<xs:import namespace="http://dispatcher.congress.osgisamples.com" schemaLocation="CongressRegistration.xsd"/>		</xs:schema>	</types>	<message name="CongressRegistrationRequestMsg">		<part name="theInputMessage" element="doservice:CongressRegistrationRequest"/>	</message>	<message name="CongressRegistrationResponseMsg">		<part name="theResponseMessage" element="doservice:CongressRegistrationResponse"/> 	</message>	<portType name="SOAPDispatcher">		<operation name="doCongressRegistration_2">			<input name="CongressRegistrationRequest" message="curr:CongressRegistrationRequestMsg"/>			<output name="CongressRegistrationResponse" message="curr:CongressRegistrationResponseMsg"/>		</operation>	</portType>	<binding name="congressSoapBinding" type="curr:SOAPDispatcher">		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>		<operation name="doCongressRegistration_2">			<soap:operation soapAction=""/>			<input>				<soap:body use="literal"/>			</input>			<output>				<soap:body use="literal"/>			</output>		</operation>	</binding>	<service name="SOAPDispatcherService">		<port binding="curr:congressSoapBinding" name="congress">			<soap:address location="http://localhost:81/services/congress"/>		</port>	</service></definitions></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache></con:interface></con:soapui-project>

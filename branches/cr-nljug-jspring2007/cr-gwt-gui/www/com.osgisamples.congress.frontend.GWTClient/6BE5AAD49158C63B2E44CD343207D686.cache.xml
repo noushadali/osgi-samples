@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cache-entry>
+	<generated-type-hash class="com.osgisamples.congress.frontend.client.CongressService_Proxy" hash="137F149B3BB0D417E78C43313D169438"/>
+	<generated-type-hash class="com.osgisamples.congress.frontend.client.CongressService_TypeSerializer" hash="EC11C925EF9270ADC475C86FD92F21DD"/>
+	<generated-type-hash class="com.osgisamples.congress.frontend.client.Session_FieldSerializer" hash="B7E2B8E63AE7D99B055F820D3370CF3B"/>
+	<generated-type-hash class="com.google.gwt.user.client.rpc.SerializableException_FieldSerializer" hash="1CB9B63ABEC9BE7E663F6C56AA395208"/>
+	<generated-type-hash class="com.osgisamples.congress.frontend.client.Registrant_FieldSerializer" hash="733699BC149A12B7AA217B90F32C9130"/>
+	<generated-type-hash class="com.osgisamples.congress.frontend.client.Registrants_FieldSerializer" hash="10AB20A7C1E9E0BD2BA4CF2A9F9581D1"/>
+	<rebind-decision in="com.google.gwt.user.client.ui.impl.TextBoxImpl" out="com.google.gwt.user.client.ui.impl.TextBoxImpl"/>
+	<rebind-decision in="com.osgisamples.congress.frontend.client.GWTClient" out="com.osgisamples.congress.frontend.client.GWTClient"/>
+	<rebind-decision in="com.google.gwt.user.client.ui.impl.FormPanelImpl" out="com.google.gwt.user.client.ui.impl.FormPanelImplSafari"/>
+	<rebind-decision in="com.google.gwt.user.client.impl.HistoryImpl" out="com.google.gwt.user.client.impl.HistoryImplSafari"/>
+	<rebind-decision in="com.google.gwt.user.client.impl.HTTPRequestImpl" out="com.google.gwt.user.client.impl.HTTPRequestImpl"/>
+	<rebind-decision in="com.google.gwt.user.client.impl.DOMImpl" out="com.google.gwt.user.client.impl.DOMImplSafari"/>
+	<rebind-decision in="com.osgisamples.congress.frontend.client.CongressService" out="com.osgisamples.congress.frontend.client.CongressService_Proxy"/>
+</cache-entry>
