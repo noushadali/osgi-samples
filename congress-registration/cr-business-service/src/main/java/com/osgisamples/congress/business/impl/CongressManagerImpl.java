@@ -3,6 +3,9 @@ package com.osgisamples.congress.business.impl;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.osgisamples.congress.business.CongressManager;
 import com.osgisamples.congress.business.CongressNotFoundException;
 import com.osgisamples.congress.business.RegistrantNotFoundForCongressException;
@@ -21,11 +24,9 @@ import com.osgisamples.congress.domain.ListenerSessionRegistration;
 import com.osgisamples.congress.domain.Participant;
 import com.osgisamples.congress.domain.Registrant;
 import com.osgisamples.congress.domain.Session;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class CongressManagerImpl implements CongressManager {
-    private final Logger logger = LoggerFactory.getLogger(CongressManagerImpl.class);
+    private final Log logger = LogFactory.getLog(CongressManagerImpl.class);
     private CongressDao congressDao;
     private RegistrantDao registrantDao;
     private SessionDao sessionDao;

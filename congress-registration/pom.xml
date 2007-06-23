@@ -145,6 +145,35 @@
                     <target>1.5</target>
                 </configuration>
             </plugin>
+			<plugin>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<configuration>
+					<projectnatures>
+						<projectnature>
+							org.eclipse.jdt.core.javanature
+						</projectnature>
+						<projectnature>
+							org.eclipse.pde.PluginNature
+						</projectnature>
+					</projectnatures>
+					<buildcommands>
+						<buildcommand>
+							org.eclipse.jdt.core.javabuilder
+						</buildcommand>
+						<buildcommand>
+							org.eclipse.pde.ManifestBuilder
+						</buildcommand>
+						<buildcommand>
+							org.eclipse.pde.SchemaBuilder
+						</buildcommand>
+					</buildcommands>
+					<classpathContainers>
+						<classpathContainer>
+							org.eclipse.pde.core.requiredPlugins
+						</classpathContainer>
+					</classpathContainers>
+				</configuration>
+			</plugin>
         </plugins>
     </build>
 </project>

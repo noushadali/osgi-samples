@@ -31,10 +31,7 @@
                 <extensions>true</extensions>
                 <version>0.9.0-incubator-SNAPSHOT</version>
                 <configuration>
-                    <instructions>
-                        <Export-Package>com.osgisamples.congress.domain*</Export-Package>
-                        <Import-Package>*</Import-Package>
-                    </instructions>
+	                <manifestFile>META-INF/manifest.mf</manifestFile>
                 </configuration>
             </plugin>
         </plugins>
